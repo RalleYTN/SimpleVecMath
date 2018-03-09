@@ -1,16 +1,16 @@
 /*
  * MIT License
  * 
- * Copyb (c) 2017 Ralph Niemitz
+ * Copyright (c) 2018 Ralph Niemitz
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the bs
+ * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  * 
- * The above copyb notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -29,7 +29,7 @@ package de.ralleytn.simple.vecmath;
  * @version 1.0.0
  * @since 1.0.0
  */
-public final class Vector4 extends Vector {
+public class Vector4 extends Vector {
 
 	public float x;
 	public float y;
@@ -62,6 +62,13 @@ public final class Vector4 extends Vector {
 		this.set(vector);
 	}
 	
+	/**
+	 * 
+	 * @param vector
+	 * @param z
+	 * @param w
+	 * @since 1.0.0
+	 */
 	public Vector4(Vector2 vector, float z, float w) {
 		
 		this.set(vector);
@@ -128,97 +135,49 @@ public final class Vector4 extends Vector {
 	
 	/**
 	 * 
-	 * @param vector
-	 * @return
+	 * @param data
 	 * @since 1.0.0
 	 */
-	public static final Vector4 normalize(Vector4 vector) {
+	public Vector4(float[] data) {
 		
-		return (Vector4)vector.copy().normalize();
+		this.set(data);
 	}
 	
 	/**
 	 * 
-	 * @param a
-	 * @param b
-	 * @return
+	 * @param quaternion
 	 * @since 1.0.0
 	 */
-	public static final float dot(Vector4 a, Vector4 b) {
+	public Vector4(Quaternion quaternion) {
 		
-		return a.dot(b);
-	}
-	
-	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 */
-	public static final Vector4 add(Vector4 a, Vector4 b) {
-		
-		return a.copy().add(b);
-	}
-	
-	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Vector4 subtract(Vector4 a, Vector4 b) {
-		
-		return a.copy().subtract(b);
-	}
-	
-	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Vector4 multiply(Vector4 a, Vector4 b) {
-		
-		return a.copy().multiply(b);
+		this.set(quaternion);
 	}
 	
 	/**
 	 * 
 	 * @param vector
-	 * @param scale
-	 * @return
+	 * @param z
 	 * @since 1.0.0
 	 */
-	public static final Vector4 scale(Vector4 vector, float scale) {
+	public Vector4(Vector2 vector, float z) {
 		
-		return (Vector4)vector.copy().scale(scale);
+		this.set(vector);
+		this.z = z;
 	}
-	
+
 	/**
 	 * 
-	 * @param vector
-	 * @return
+	 * @param quaternion
 	 * @since 1.0.0
 	 */
-	public static final Vector4 negate(Vector4 vector) {
+	public void set(Quaternion quaternion) {
 		
-		return (Vector4)vector.copy().negate();
+		this.x = quaternion.x;
+		this.y = quaternion.y;
+		this.z = quaternion.z;
+		this.w = quaternion.w;
 	}
-	
-	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final float angle(Vector4 a, Vector4 b) {
-		
-		return a.angle(b);
-	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -227,12 +186,23 @@ public final class Vector4 extends Vector {
 	 * @param w
 	 * @since 1.0.0
 	 */
-	public final void set(float x, float y, float z, float w) {
+	public void set(float x, float y, float z, float w) {
 		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.w = w;
+		this.set(x, y, z, w);
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @since 1.0.0
+	 */
+	public void set(float[] data) {
+		
+		this.x = data[0];
+		this.y = data[1];
+		
+		if(data.length > 1) this.z = data[2];
+		if(data.length > 2) this.w = data[3];
 	}
 	
 	/**
@@ -240,7 +210,7 @@ public final class Vector4 extends Vector {
 	 * @param vector
 	 * @since 1.0.0
 	 */
-	public final void set(Vector4 vector) {
+	public void set(Vector4 vector) {
 		
 		this.x = vector.x;
 		this.y = vector.y;
@@ -255,7 +225,7 @@ public final class Vector4 extends Vector {
 	 * @param z
 	 * @since 1.0.0
 	 */
-	public final void set(float x, float y, float z) {
+	public void set(float x, float y, float z) {
 		
 		this.x = x;
 		this.y = y;
@@ -267,7 +237,7 @@ public final class Vector4 extends Vector {
 	 * @param vector
 	 * @since 1.0.0
 	 */
-	public final void set(Vector3 vector) {
+	public void set(Vector3 vector) {
 		
 		this.x = vector.x;
 		this.y = vector.y;
@@ -280,7 +250,7 @@ public final class Vector4 extends Vector {
 	 * @param y
 	 * @since 1.0.0
 	 */
-	public final void set(float x, float y) {
+	public void set(float x, float y) {
 		
 		this.x = x;
 		this.y = y;
@@ -291,7 +261,7 @@ public final class Vector4 extends Vector {
 	 * @param vector
 	 * @since 1.0.0
 	 */
-	public final void set(Vector2 vector) {
+	public void set(Vector2 vector) {
 		
 		this.x = vector.x;
 		this.y = vector.y;
@@ -302,7 +272,7 @@ public final class Vector4 extends Vector {
 	 * @param x
 	 * @since 1.0.0
 	 */
-	public final void setX(float x) {
+	public void setX(float x) {
 		
 		this.x = x;
 	}
@@ -312,7 +282,7 @@ public final class Vector4 extends Vector {
 	 * @param y
 	 * @since 1.0.0
 	 */
-	public final void setY(float y) {
+	public void setY(float y) {
 		
 		this.y = y;
 	}
@@ -322,7 +292,7 @@ public final class Vector4 extends Vector {
 	 * @param z
 	 * @since 1.0.0
 	 */
-	public final void setZ(float z) {
+	public void setZ(float z) {
 		
 		this.z = z;
 	}
@@ -332,19 +302,9 @@ public final class Vector4 extends Vector {
 	 * @param w
 	 * @since 1.0.0
 	 */
-	public final void setW(float w) {
+	public void setW(float w) {
 		
 		this.w = w;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final Vector4 copy() {
-		
-		return new Vector4(this.x, this.y, this.z, this.w);
 	}
 	
 	/**
@@ -353,7 +313,7 @@ public final class Vector4 extends Vector {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final float dot(Vector4 b) {
+	public float dot(Vector4 b) {
 		
 		return this.x * b.x + this.y * b.y + this.z * b.z + this.w * b.w;
 	}
@@ -364,7 +324,7 @@ public final class Vector4 extends Vector {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 add(Vector4 vector) {
+	public Vector4 add(Vector4 vector) {
 		
 		this.x += vector.x;
 		this.y += vector.y;
@@ -380,7 +340,7 @@ public final class Vector4 extends Vector {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 subtract(Vector4 vector) {
+	public Vector4 subtract(Vector4 vector) {
 		
 		this.x -= vector.x;
 		this.y -= vector.y;
@@ -396,7 +356,7 @@ public final class Vector4 extends Vector {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 multiply(Vector4 vector) {
+	public Vector4 multiply(Vector4 vector) {
 		
 		this.x *= vector.x;
 		this.y *= vector.y;
@@ -412,9 +372,9 @@ public final class Vector4 extends Vector {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final float angle(Vector4 b) {
+	public float angle(Vector4 b) {
 		
-		float dls = Vector4.dot(this, b) / (this.length() * b.length());
+		float dls = this.dot(b) / (this.length() * b.length());
 		
 		if(dls < -1F) {
 			
@@ -428,14 +388,70 @@ public final class Vector4 extends Vector {
 		return (float)Math.acos(dls);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public float getX() {
+		
+		return this.x;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public float getY() {
+		
+		return this.y;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public float getZ() {
+		
+		return this.z;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public float getW() {
+		
+		return this.w;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public Quaternion toQuaternion() {
+		
+		return new Quaternion(this);
+	}
+	
 	@Override
-	public final float lengthSquared() {
+	public Vector4 copy() {
+		
+		return new Vector4(this.x, this.y, this.z, this.w);
+	}
+	
+	@Override
+	public float lengthSquared() {
 		
 		return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
 	}
 
 	@Override
-	public final Vector negate() {
+	public Vector4 negate() {
 		
 		this.x = -this.x;
 		this.y = -this.y;
@@ -446,7 +462,7 @@ public final class Vector4 extends Vector {
 	}
 
 	@Override
-	public final Vector scale(float scale) {
+	public Vector4 scale(float scale) {
 		
 		this.x *= scale;
 		this.y *= scale;
@@ -455,16 +471,22 @@ public final class Vector4 extends Vector {
 		
 		return this;
 	}
+	
+	@Override
+	public float[] toArray() {
+		
+		return new float[] {this.x, this.y, this.z, this.w};
+	}
 
 	@Override
-	public final String toString() {
+	public String toString() {
 		
 		// Cannot take %f because it will format the values depending on locale
 		return String.format("(%s,%s,%s,%s)", this.x, this.y, this.z, this.w);
 	}
 	
 	@Override
-	public final boolean equals(Object object) {
+	public boolean equals(Object object) {
 		
 		if(object != null && object instanceof Vector4) {
 			
@@ -475,43 +497,12 @@ public final class Vector4 extends Vector {
 		return false;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final float getX() {
-		
-		return this.x;
-	}
+    @Override
+    public int hashCode() {
 	
-	/**
-	 * 
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final float getY() {
-		
-		return this.y;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final float getZ() {
-		
-		return this.z;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final float getW() {
-		
-		return this.w;
-	}
+    	return Float.floatToIntBits(this.x) ^
+               Float.floatToIntBits(this.y) ^
+               Float.floatToIntBits(this.z) ^
+               Float.floatToIntBits(this.w);
+    }
 }

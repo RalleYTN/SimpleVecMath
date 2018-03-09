@@ -1,7 +1,7 @@
 /*
  * MIT License
  * 
- * Copyright (c) 2017 Ralph Niemitz
+ * Copyright (c) 2018 Ralph Niemitz
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,50 +24,59 @@
 package de.ralleytn.simple.vecmath;
 
 /**
- * The abstract representation of a vector with undefined size.
+ * The abstract representation of a matrix with undefined size.
  * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
  * @version 1.0.0
  * @since 1.0.0
  */
-public abstract class Vector {
+public abstract class Matrix {
 
 	/**
-	 * @return the length of the vector
+	 * 
+	 * @return
 	 * @since 1.0.0
 	 */
-	public final float length() {
-		
-		return (float)Math.sqrt(this.lengthSquared());
-	}
+	public abstract Matrix identity();
 	
 	/**
-	 * @return the length of the vector * the length of the vector
+	 * 
+	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract float lengthSquared();
+	public abstract Matrix invert();
 	
 	/**
-	 * Negates the vector.<p><i>this instance will be manipulated</i></p>
-	 * @return the vector
+	 * 
+	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract Vector negate();
+	public abstract Matrix negate();
 	
 	/**
-	 * Scales the vector.<p><i>this instance will be manipulated</i></p>
-	 * @param scale the scalar value
-	 * @return the vector
+	 * 
+	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract Vector scale(float scale);
+	public abstract Matrix transpose();
 	
 	/**
-	 * Normalizes the vector.<p><i>this instance will be manipulated</i></p>
-	 * @return the vector
+	 * 
+	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector normalize() {
-
-		return this.scale(1.0F / this.length());
-	}
+	public abstract Matrix zero();
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public abstract float determinant();
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public abstract float[] toArray();
 }

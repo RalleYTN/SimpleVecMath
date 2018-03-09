@@ -1,7 +1,7 @@
 /*
  * MIT License
  * 
- * Copyright (c) 2017 Ralph Niemitz
+ * Copyright (c) 2018 Ralph Niemitz
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,36 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.ralleytn.simple.vecmath.internal;
+package de.ralleytn.simple.vecmath;
 
-/**
- * Contains some utility methods for the matrix classes.
- * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
- * @version 1.0.0
- * @since 1.0.0
- */
-public final class LunaticMatrixUtil {
+public class MatrixN extends Matrix {
 
-	private LunaticMatrixUtil() {}
-	
-	/**
-	 * 
-	 * @param t00
-	 * @param t01
-	 * @param t02
-	 * @param t10
-	 * @param t11
-	 * @param t12
-	 * @param t20
-	 * @param t21
-	 * @param t22
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final float determinant3x3(float t00, float t01, float t02, float t10, float t11, float t12, float t20, float t21, float t22) {
+	@Override
+	public MatrixN identity() {
+		
+		return null;
+	}
 
-		return t00 * (t11 * t22 - t12 * t21)
-             + t01 * (t12 * t20 - t10 * t22)
-             + t02 * (t10 * t21 - t11 * t20);
+	@Override
+	public MatrixN invert() {
+		
+		return null;
+	}
+
+	@Override
+	public MatrixN negate() {
+		
+		return null;
+	}
+
+	@Override
+	public MatrixN transpose() {
+		
+		return null;
+	}
+
+	@Override
+	public MatrixN zero() {
+		
+		return null;
+	}
+
+	@Override
+	public float determinant() {
+		
+		return 0;
+	}
+
+	@Override
+	public float[] toArray() {
+		
+		return null;
 	}
 }

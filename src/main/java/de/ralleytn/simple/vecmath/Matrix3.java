@@ -1,7 +1,7 @@
 /*
  * MIT License
  * 
- * Copyright (c) 2017 Ralph Niemitz
+ * Copyright (c) 2018 Ralph Niemitz
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ package de.ralleytn.simple.vecmath;
  * @version 1.0.0
  * @since 1.0.0
  */
-public final class Matrix3 extends Matrix {
+public class Matrix3 extends Matrix {
 
 	public float m00, m01, m02;
 	public float m10, m11, m12;
@@ -40,7 +40,7 @@ public final class Matrix3 extends Matrix {
 	 */
 	public Matrix3() {
 		
-		this.setIdentity();
+		this.identity();
 	}
 	
 	/**
@@ -65,91 +65,10 @@ public final class Matrix3 extends Matrix {
 	
 	/**
 	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Matrix3 add(Matrix3 a, Matrix3 b) {
-		
-		return a.copy().add(b);
-	}
-	
-	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Matrix3 subtract(Matrix3 a, Matrix3 b) {
-		
-		return a.copy().subtract(b);
-	}
-	
-	/**
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Matrix3 multiply(Matrix3 a, Matrix3 b) {
-		
-		return a.copy().multiply(b);
-	}
-	
-	/**
-	 * 
-	 * @param matrix
-	 * @param vector
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Vector3 transform(Matrix3 matrix, Vector3 vector) {
-		
-		return matrix.copy().transform(vector);
-	}
-	
-	/**
-	 * 
-	 * @param matrix
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Matrix3 invert(Matrix3 matrix) {
-		
-		return (Matrix3)matrix.copy().invert();
-	}
-	
-	/**
-	 * 
-	 * @param matrix
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Matrix3 negate(Matrix3 matrix) {
-		
-		return (Matrix3)matrix.copy().negate();
-	}
-	
-	/**
-	 * 
-	 * @param matrix
-	 * @return
-	 * @since 1.0.0
-	 */
-	public static final Matrix3 transpose(Matrix3 matrix) {
-		
-		return (Matrix3)matrix.copy().transpose();
-	}
-	
-	/**
-	 * 
 	 * @param data
 	 * @since 1.0.0
 	 */
-	public final void set(float[] data) {
+	public void set(float[] data) {
 		
 		this.m00 = data[0];
 		this.m01 = data[1];
@@ -169,7 +88,7 @@ public final class Matrix3 extends Matrix {
 	 * @param matrix
 	 * @since 1.0.0
 	 */
-	public final void set(Matrix3 matrix) {
+	public void set(Matrix3 matrix) {
 		
 		this.set(matrix.toArray());
 	}
@@ -179,7 +98,7 @@ public final class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Matrix3 copy() {
+	public Matrix3 copy() {
 		
 		return new Matrix3(new float[] {
 			
@@ -195,7 +114,7 @@ public final class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Matrix3 add(Matrix3 matrix) {
+	public Matrix3 add(Matrix3 matrix) {
 		
 		this.m00 += matrix.m00;
 		this.m01 += matrix.m01;
@@ -218,7 +137,7 @@ public final class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Matrix3 subtract(Matrix3 matrix) {
+	public Matrix3 subtract(Matrix3 matrix) {
 		
 		this.m00 -= matrix.m00;
 		this.m01 -= matrix.m01;
@@ -241,7 +160,7 @@ public final class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Matrix3 multiply(Matrix3 matrix) {
+	public Matrix3 multiply(Matrix3 matrix) {
 		
 		float m00 = this.m00 * matrix.m00 + this.m10 * matrix.m01 + this.m20 * matrix.m02;
 		float m01 = this.m01 * matrix.m00 + this.m11 * matrix.m01 + this.m21 * matrix.m02;
@@ -276,7 +195,7 @@ public final class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector3 transform(Vector3 vector) {
+	public Vector3 transform(Vector3 vector) {
 		
 		float x = this.m00 * vector.x + this.m10 * vector.y + this.m20 * vector.z;
 		float y = this.m01 * vector.x + this.m11 * vector.y + this.m21 * vector.z;
@@ -286,7 +205,7 @@ public final class Matrix3 extends Matrix {
 	}
 	
 	@Override
-	public final Matrix setIdentity() {
+	public Matrix3 identity() {
 		
 		this.m00 = 1.0F;
 		this.m01 = 0.0F;
@@ -304,7 +223,7 @@ public final class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public final Matrix invert() {
+	public Matrix3 invert() {
 		
 		float determinant = this.determinant();
 		float determinantInv = 1.0F / determinant;
@@ -335,7 +254,7 @@ public final class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public final Matrix negate() {
+	public Matrix3 negate() {
 		
 		this.m00 = -this.m00;
 		this.m01 = -this.m02;
@@ -353,7 +272,7 @@ public final class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public final Matrix transpose() {
+	public Matrix3 transpose() {
 		
 		float m00 = this.m00;
 		float m01 = this.m10;
@@ -383,7 +302,7 @@ public final class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public final Matrix setZero() {
+	public Matrix3 zero() {
 		
 		this.m00 = 0.0F;
 		this.m01 = 0.0F;
@@ -401,7 +320,7 @@ public final class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public final float determinant() {
+	public float determinant() {
 		
 		return this.m00 * (this.m11 * this.m22 - this.m12 * this.m21) +
 			   this.m01 * (this.m12 * this.m20 - this.m10 * this.m22) +
@@ -409,14 +328,25 @@ public final class Matrix3 extends Matrix {
 	}
 	
 	@Override
-	public final String toString() {
+	public float[] toArray() {
+		
+		return new float[] {
+				
+			this.m00, this.m01, this.m02,
+			this.m10, this.m11, this.m12,
+			this.m20, this.m21, this.m22
+		};
+	}
+	
+	@Override
+	public String toString() {
 		
 		// Cannot take %f because it will format the values depending on locale
 		return String.format("[\n\t[%s,%s,%s],\n\t[%s,%s,%s],\n\t[%s,%s,%s]\n]", this.m00, this.m01, this.m02, this.m10, this.m11, this.m12, this.m20, this.m21, this.m22);
 	}
 	
 	@Override
-	public final boolean equals(Object object) {
+	public boolean equals(Object object) {
 		
 		if(object != null && object instanceof Matrix3) {
 			
@@ -428,16 +358,5 @@ public final class Matrix3 extends Matrix {
 		}
 		
 		return false;
-	}
-
-	@Override
-	public final float[] toArray() {
-		
-		return new float[] {
-				
-			this.m00, this.m01, this.m02,
-			this.m10, this.m11, this.m12,
-			this.m20, this.m21, this.m22
-		};
 	}
 }
