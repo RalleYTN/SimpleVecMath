@@ -24,26 +24,41 @@
 package de.ralleytn.simple.vecmath;
 
 /**
- * 
+ * Represents a three dimensional vector.
  * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
  * @version 1.0.0
  * @since 1.0.0
  */
-public class Vector3 extends Vector {
+public final class Vector3 extends Vector<Vector3> {
 
+	/**
+	 * The 1st element
+	 * @since 1.0.0
+	 */
 	public float x;
+	
+	/**
+	 * The 2nd element
+	 * @since 1.0.0
+	 */
 	public float y;
+	
+	/**
+	 * The 3rd element
+	 * @since 1.0.0
+	 */
 	public float z;
 	
 	/**
+	 * Constructs a zero vector.
 	 * @since 1.0.0
 	 */
 	public Vector3() {}
 	
 	/**
-	 * 
-	 * @param x
-	 * @param y
+	 * Constructs a vector with only the 1st and the 2nd element.
+	 * @param x the 1st element
+	 * @param y the 2nd element
 	 * @since 1.0.0
 	 */
 	public Vector3(float x, float y) {
@@ -52,8 +67,8 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param vector
+	 * Constructs a vector with the values of a two dimensional one.
+	 * @param vector a two dimensional vector
 	 * @since 1.0.0
 	 */
 	public Vector3(Vector2 vector) {
@@ -62,9 +77,9 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param vector
-	 * @param z
+	 * Constructs a vector with the 1st and 2nd element from a two dimensional vector and a separate 3rd element.
+	 * @param vector a two dimensional vector
+	 * @param z the 3rd element
 	 * @since 1.0.0
 	 */
 	public Vector3(Vector2 vector, float z) {
@@ -74,10 +89,10 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param z
+	 * Constructs a vector.
+	 * @param x the 1st element
+	 * @param y the 2nd element
+	 * @param z the 3rd element
 	 * @since 1.0.0
 	 */
 	public Vector3(float x, float y, float z) {
@@ -86,8 +101,8 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param vector
+	 * Constructs a vector from another three dimensional vector.
+	 * @param vector another three dimensional vector
 	 * @since 1.0.0
 	 */
 	public Vector3(Vector3 vector) {
@@ -96,8 +111,8 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param data
+	 * Constructs a vector from a {@code float} array.
+	 * @param data a {@code float} array containing the vector data
 	 * @since 1.0.0
 	 */
 	public Vector3(float[] data) {
@@ -106,11 +121,11 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param data
+	 * Sets the values of this vector.
+	 * @param data a {@code float} array containing the vector data
 	 * @since 1.0.0
 	 */
-	public void set(float[] data) {
+	public final void set(float[] data) {
 		
 		this.x = data[0];
 		this.y = data[1];
@@ -122,13 +137,13 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param z
+	 * Sets the values of this vector.
+	 * @param x the 1st element
+	 * @param y the 2nd element
+	 * @param z the 3rd element
 	 * @since 1.0.0
 	 */
-	public void set(float x, float y, float z) {
+	public final void set(float x, float y, float z) {
 		
 		this.x = x;
 		this.y = y;
@@ -136,11 +151,11 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param vector
+	 * Sets the values of this vector.
+	 * @param vector another three dimensional vector
 	 * @since 1.0.0
 	 */
-	public void set(Vector3 vector) {
+	public final void set(Vector3 vector) {
 		
 		this.x = vector.x;
 		this.y = vector.y;
@@ -148,65 +163,36 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param x
-	 * @param y
+	 * Sets the values of this vector.
+	 * @param x the 1st element
+	 * @param y the 2nd element
 	 * @since 1.0.0
 	 */
-	public void set(float x, float y) {
+	public final void set(float x, float y) {
 		
 		this.x = x;
 		this.y = y;
 	}
 	
 	/**
-	 * 
-	 * @param vector
+	 * Sets the values of this vector.
+	 * @param vector a two dimensional vector
 	 * @since 1.0.0
 	 */
-	public void set(Vector2 vector) {
+	public final void set(Vector2 vector) {
 		
 		this.x = vector.x;
 		this.y = vector.y;
 	}
 	
 	/**
-	 * 
-	 * @param x
+	 * Adds the value of another vector to this one.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param b the vector on the right side of the calculation
+	 * @return a + b
 	 * @since 1.0.0
 	 */
-	public void setX(float x) {
-		
-		this.x = x;
-	}
-	
-	/**
-	 * 
-	 * @param y
-	 * @since 1.0.0
-	 */
-	public void setY(float y) {
-		
-		this.y = y;
-	}
-	
-	/**
-	 * 
-	 * @param z
-	 * @since 1.0.0
-	 */
-	public void setZ(float z) {
-		
-		this.z = z;
-	}
-	
-	/**
-	 * 
-	 * @param b
-	 * @return
-	 * @since 1.0.0
-	 */
-	public Vector3 add(Vector3 b) {
+	public final Vector3 add(Vector3 b) {
 		
 		this.x += b.x;
 		this.y += b.y;
@@ -216,12 +202,13 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Subtracts the other vector from this one.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param b the vector on the right side of the calculation
+	 * @return a - b
 	 * @since 1.0.0
 	 */
-	public Vector3 subtract(Vector3 b) {
+	public final Vector3 subtract(Vector3 b) {
 		
 		this.x -= b.x;
 		this.y -= b.y;
@@ -231,12 +218,13 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Multiplies this vector with another one.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param b the vector on the right side of the calculation
+	 * @return a * b
 	 * @since 1.0.0
 	 */
-	public Vector3 multiply(Vector3 b) {
+	public final Vector3 multiply(Vector3 b) {
 		
 		this.x *= b.x;
 		this.y *= b.y;
@@ -246,12 +234,13 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Calculates the cross product between this vector and another one.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param b the vector on the right side of the calculation
+	 * @return x = y * z2 - z * y2<br>y = x2 * z - z2 * x<br>z = x * y2 - y * x2
 	 * @since 1.0.0
 	 */
-	public Vector3 cross(Vector3 b) {
+	public final Vector3 cross(Vector3 b) {
 		
 		this.x = this.y * b.z - this.z * b.y;
 		this.y = b.x * this.z - b.z * this.x;
@@ -261,23 +250,23 @@ public class Vector3 extends Vector {
 	}
 
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Calculates the dot product between this vector and another one.
+	 * @param b the vector on the right side of the calculation
+	 * @return x * x2 + y * y2 + z * z2
 	 * @since 1.0.0
 	 */
-	public float dot(Vector3 b) {
+	public final float dot(Vector3 b) {
 		
 		return this.x * b.x + this.y * b.y + this.z * b.z;
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Calculates the angle between this vector and another one.
+	 * @param b the vector on the right side of the calculation
+	 * @return acos(min(max(dot(b) / (a.length() * b.length()), -1), 1))
 	 * @since 1.0.0
 	 */
-	public float angle(Vector3 b) {
+	public final float angle(Vector3 b) {
 		
 		float dls = this.dot(b) / (this.length() * b.length());
 		
@@ -294,13 +283,14 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param angle
-	 * @param axis
-	 * @return
+	 * Rotates this vector on a single axis.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param angle the angle in degrees
+	 * @param axis the axis on which the vector should be rotated.
+	 * @return the rotated vector
 	 * @since 1.0.0
 	 */
-	public Vector3 rotate(float angle, Vector3 axis) {
+	public final Vector3 rotate(float angle, Axis axis) {
 		
 		Matrix4 matrix = new Matrix4();
 		matrix.m03 = this.x;
@@ -312,12 +302,12 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Calculates the squared distance between this vector and another three dimensional vector.
+	 * @param b the vector on the right side of the calculation
+	 * @return (x - x2)² + (y - y2)² + (z - z2)²
 	 * @since 1.0.0
 	 */
-	public float distanceSquared(Vector3 b) {
+	public final float distanceSquared(Vector3 b) {
 		
 		double dx = this.x - b.x;
     	double dy = this.y - b.y;
@@ -327,45 +317,46 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Calculates the distance between this vector and another three dimensional vector.
+	 * @param b the vector on the right side of the calculation
+	 * @return sqrt({@link #distanceSquared(Vector3)})
 	 * @since 1.0.0
 	 */
-	public float distance(Vector3 b) {
+	public final float distance(Vector3 b) {
 		
 		return (float)Math.sqrt(this.distanceSquared(b));
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Calculates the L-1 (Manhattan) distance between this vector and another three dimensional vector.
+	 * @param b the vector on the right side of the calculation
+	 * @return abs(x - x2) + abs(y - y2) + abs(z - z2)
 	 * @since 1.0.0
 	 */
-	public float distanceL1(Vector3 b) {
+	public final float distanceL1(Vector3 b) {
 		
 		return Math.abs(this.x - b.x) + Math.abs(this.y - b.y) + Math.abs(this.z - b.z);
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Calculates the L-infinite distance between this vector and another three dimensional vector.
+	 * @param b the vector on the right side of the calculation
+	 * @return max(max(abs(x - x2), abs(y - y2)), abs(z - z2))
 	 * @since 1.0.0
 	 */
-	public float distanceLinf(Vector3 b) {
+	public final float distanceLinf(Vector3 b) {
 		
 		return Math.max(Math.max(Math.abs(this.x - b.x), Math.abs(this.y - b.y)), Math.abs(this.z - b.z));
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @return
+	 * Projects a four dimensional vector on this one.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param b the four dimensional vector that should be projected to this one
+	 * @return x = x2 / w2<br>y = y2 / w2<br>z = z2 / w2
 	 * @since 1.0.0
 	 */
-	public Vector3 project(Vector4 b) {
+	public final Vector3 project(Vector4 b) {
 		
 		 this.x = b.x / b.w;
     	 this.y = b.y / b.w;
@@ -375,49 +366,135 @@ public class Vector3 extends Vector {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Multiplies this vector with a three dimensional matrix.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param matrix the three dimensional matrix
+	 * @return x = x * m00 + y * m01 + z * m02<br>y = x * m10 + y * m11 + z * m12<br>z = x * m20 + y * m21 + z * m22
 	 * @since 1.0.0
 	 */
-	public float getX() {
+	public final Vector3 multiply(Matrix3 matrix) {
 		
-		return this.x;
+		this.x = this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02;
+		this.y = this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12;
+		this.z = this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22;
+		
+		return this;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Multiplies this vector with a four dimensional matrix.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param matrix the four dimensional matrix
+	 * @return x = x * m00 + y * m01 + z * m02<br>y = x * m10 + y * m11 + z * m12<br>z = x * m20 + y * m21 + z * m22
 	 * @since 1.0.0
 	 */
-	public float getY() {
+	public final Vector3 multiply(Matrix4 matrix) {
 		
-		return this.y;
+		this.x = this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02;
+		this.y = this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12;
+		this.z = this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22;
+		
+		return this;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Linearly interpolates between this and another three dimensional vector.
+	 * <p><i>this instance will be manipulated</i></p>
+	 * @param b the vector on the right side of the calculation
+	 * @param alpha the alpha interpolation parameter
+	 * @return beta = {@code 1.0F} - alpha<br>x = beta * x + alpha * x2<br>y = beta * y + alpha * y2<br>z = beta * z + alpha * z2
 	 * @since 1.0.0
 	 */
-	public float getZ() {
+	public final Vector3 interpolate(Vector3 b, float alpha) {
 		
-		return this.z;
+    	float beta = 1.0F - alpha;
+    	
+    	this.x = beta * this.x + alpha * b.x;
+    	this.y = beta * this.y + alpha * b.y;
+    	this.z = beta * this.z + alpha * b.z;
+    	
+    	return this;
+	}
+	
+	/**
+	 * Returns {@code true} if the L-infinite distance between this vector and the other one
+	 * is less than or equal to the epsilon parameter, else {@code false}
+	 * @param b the vector that is compared with this vector
+	 * @param epsilon the threshold value
+	 * @return (abs(x2 - x) <= epsilon) AND (abs(y2 - y) <= epsilon) AND (abs(z2 - z) <= epsilon)
+	 * @since 1.0.0
+	 */
+	public final boolean epsilonEquals(Vector3 b, float epsilon) {
+		
+		return (Math.abs(b.x - this.x) <= epsilon) &&
+			   (Math.abs(b.y - this.y) <= epsilon) &&
+			   (Math.abs(b.z - this.z) <= epsilon);
+	}
+	
+	/**
+	 * Converts this three dimensional vector to a four dimensional one.
+	 * @return the four dimensional vector
+	 * @since 1.0.0
+	 */
+	public final Vector4 toVector4() {
+		
+		return new Vector4(this);
+	}
+	
+	/**
+	 * Converts this vector to a quaternion.
+	 * @return the quaternion
+	 * @since 1.0.0
+	 */
+	public final Quaternion toQuaternion() {
+		
+		return new Quaternion(this);
 	}
 	
 	@Override
-	public Vector3 copy() {
+    public final Vector3 clampMin(float min) {
+	
+    	if(this.x < min) this.x = min;
+    	if(this.y < min) this.y = min;
+    	if(this.z < min) this.z = min;
+    	
+    	return this;
+    }
+
+	@Override
+    public final Vector3 clampMax(float max) {
+	
+    	if(this.x > max) this.x = max;
+    	if(this.y > max) this.y = max;
+    	if(this.z < max) this.z = max;
+    	
+    	return this;
+    }
+	
+	@Override
+	public final Vector3 absolute() {
 		
-		return new Vector3(this.x, this.y, this.z);
+		if(this.x < 0.0F) this.x = -this.x;
+		if(this.y < 0.0F) this.y = -this.y;
+		if(this.z < 0.0F) this.z = -this.z;
+		
+		return this;
+	}
+	
+	@Override
+	public final Vector3 copy() {
+		
+		return new Vector3(this);
 	}
 
 	@Override
-	public float lengthSquared() {
+	public final float lengthSquared() {
 		
 		return this.x * this.x + this.y * this.y + this.z * this.z;
 	}
 
 	@Override
-	public Vector3 negate() {
+	public final Vector3 negate() {
 		
 		this.x = -this.x;
 		this.y = -this.y;
@@ -427,7 +504,7 @@ public class Vector3 extends Vector {
 	}
 
 	@Override
-	public Vector3 scale(float scale) {
+	public final Vector3 scale(float scale) {
 		
 		this.x *= scale;
 		this.y *= scale;
@@ -437,20 +514,20 @@ public class Vector3 extends Vector {
 	}
 	
 	@Override
-	public float[] toArray() {
+	public final float[] toArray() {
 		
 		return new float[] {this.x, this.y, this.z};
 	}
 	
 	@Override
-	public String toString() {
+	public final String toString() {
 		
 		// Cannot take %f because it will format the values depending on locale
 		return String.format("(%s,%s,%s)", this.x, this.y, this.z);
 	}
 
 	@Override
-	public boolean equals(Object object) {
+	public final boolean equals(Object object) {
 		
 		if(object != null && object instanceof Vector3) {
 			
@@ -462,7 +539,7 @@ public class Vector3 extends Vector {
 	}
 	
     @Override
-    public int hashCode() {
+    public final int hashCode() {
 	
     	return Float.floatToIntBits(this.x) ^
                Float.floatToIntBits(this.y) ^

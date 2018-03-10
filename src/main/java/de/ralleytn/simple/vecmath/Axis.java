@@ -23,47 +23,67 @@
  */
 package de.ralleytn.simple.vecmath;
 
-public final class MatrixN extends Matrix<MatrixN> {
+/**
+ * Represents an axis. Used for rotating matrices and vectors.
+ * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+public final class Axis {
 
-	@Override
-	public final MatrixN identity() {
+	/**
+	 * X axis
+	 * @since 1.0.0
+	 */
+	public static final Axis X = new Axis(1.0F, 0.0F, 0.0F);
+	
+	/**
+	 * Y axis
+	 * @since 1.0.0
+	 */
+	public static final Axis Y = new Axis(0.0F, 1.0F, 0.0F);
+	
+	/**
+	 * Z axis
+	 * @since 1.0.0
+	 */
+	public static final Axis Z = new Axis(0.0F, 0.0F, 1.0F);
+	
+	private final float x;
+	private final float y;
+	private final float z;
+	
+	private Axis(float x, float y, float z) {
 		
-		return null;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
-
-	@Override
-	public final MatrixN invert() {
+	
+	/**
+	 * @return the x value
+	 * @since 1.0.0
+	 */
+	public final float getX() {
 		
-		return null;
+		return this.x;
 	}
-
-	@Override
-	public final MatrixN negate() {
+	
+	/**
+	 * @return the y value
+	 * @since 1.0.0
+	 */
+	public final float getY() {
 		
-		return null;
+		return this.y;
 	}
-
-	@Override
-	public final MatrixN transpose() {
+	
+	/**
+	 * @return the z value
+	 * @since 1.0.0
+	 */
+	public final float getZ() {
 		
-		return null;
-	}
-
-	@Override
-	public final MatrixN zero() {
-		
-		return null;
-	}
-
-	@Override
-	public final float determinant() {
-		
-		return 0;
-	}
-
-	@Override
-	public final float[] toArray() {
-		
-		return null;
+		return this.z;
 	}
 }

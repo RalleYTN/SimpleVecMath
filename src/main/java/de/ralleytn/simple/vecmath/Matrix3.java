@@ -29,7 +29,7 @@ package de.ralleytn.simple.vecmath;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class Matrix3 extends Matrix {
+public final class Matrix3 extends Matrix<Matrix3> {
 
 	public float m00, m01, m02;
 	public float m10, m11, m12;
@@ -68,7 +68,7 @@ public class Matrix3 extends Matrix {
 	 * @param data
 	 * @since 1.0.0
 	 */
-	public void set(float[] data) {
+	public final void set(float[] data) {
 		
 		this.m00 = data[0];
 		this.m01 = data[1];
@@ -88,7 +88,7 @@ public class Matrix3 extends Matrix {
 	 * @param matrix
 	 * @since 1.0.0
 	 */
-	public void set(Matrix3 matrix) {
+	public final void set(Matrix3 matrix) {
 		
 		this.set(matrix.toArray());
 	}
@@ -98,7 +98,7 @@ public class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public Matrix3 copy() {
+	public final Matrix3 copy() {
 		
 		return new Matrix3(new float[] {
 			
@@ -114,7 +114,7 @@ public class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public Matrix3 add(Matrix3 matrix) {
+	public final Matrix3 add(Matrix3 matrix) {
 		
 		this.m00 += matrix.m00;
 		this.m01 += matrix.m01;
@@ -137,7 +137,7 @@ public class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public Matrix3 subtract(Matrix3 matrix) {
+	public final Matrix3 subtract(Matrix3 matrix) {
 		
 		this.m00 -= matrix.m00;
 		this.m01 -= matrix.m01;
@@ -160,7 +160,7 @@ public class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public Matrix3 multiply(Matrix3 matrix) {
+	public final Matrix3 multiply(Matrix3 matrix) {
 		
 		float m00 = this.m00 * matrix.m00 + this.m10 * matrix.m01 + this.m20 * matrix.m02;
 		float m01 = this.m01 * matrix.m00 + this.m11 * matrix.m01 + this.m21 * matrix.m02;
@@ -195,7 +195,7 @@ public class Matrix3 extends Matrix {
 	 * @return
 	 * @since 1.0.0
 	 */
-	public Vector3 transform(Vector3 vector) {
+	public final Vector3 transform(Vector3 vector) {
 		
 		float x = this.m00 * vector.x + this.m10 * vector.y + this.m20 * vector.z;
 		float y = this.m01 * vector.x + this.m11 * vector.y + this.m21 * vector.z;
@@ -205,7 +205,7 @@ public class Matrix3 extends Matrix {
 	}
 	
 	@Override
-	public Matrix3 identity() {
+	public final Matrix3 identity() {
 		
 		this.m00 = 1.0F;
 		this.m01 = 0.0F;
@@ -223,7 +223,7 @@ public class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public Matrix3 invert() {
+	public final Matrix3 invert() {
 		
 		float determinant = this.determinant();
 		float determinantInv = 1.0F / determinant;
@@ -254,7 +254,7 @@ public class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public Matrix3 negate() {
+	public final Matrix3 negate() {
 		
 		this.m00 = -this.m00;
 		this.m01 = -this.m02;
@@ -272,7 +272,7 @@ public class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public Matrix3 transpose() {
+	public final Matrix3 transpose() {
 		
 		float m00 = this.m00;
 		float m01 = this.m10;
@@ -302,7 +302,7 @@ public class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public Matrix3 zero() {
+	public final Matrix3 zero() {
 		
 		this.m00 = 0.0F;
 		this.m01 = 0.0F;
@@ -320,7 +320,7 @@ public class Matrix3 extends Matrix {
 	}
 
 	@Override
-	public float determinant() {
+	public final float determinant() {
 		
 		return this.m00 * (this.m11 * this.m22 - this.m12 * this.m21) +
 			   this.m01 * (this.m12 * this.m20 - this.m10 * this.m22) +
@@ -328,7 +328,7 @@ public class Matrix3 extends Matrix {
 	}
 	
 	@Override
-	public float[] toArray() {
+	public final float[] toArray() {
 		
 		return new float[] {
 				
@@ -339,14 +339,14 @@ public class Matrix3 extends Matrix {
 	}
 	
 	@Override
-	public String toString() {
+	public final String toString() {
 		
 		// Cannot take %f because it will format the values depending on locale
 		return String.format("[\n\t[%s,%s,%s],\n\t[%s,%s,%s],\n\t[%s,%s,%s]\n]", this.m00, this.m01, this.m02, this.m10, this.m11, this.m12, this.m20, this.m21, this.m22);
 	}
 	
 	@Override
-	public boolean equals(Object object) {
+	public final boolean equals(Object object) {
 		
 		if(object != null && object instanceof Matrix3) {
 			

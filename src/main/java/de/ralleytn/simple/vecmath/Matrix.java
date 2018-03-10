@@ -23,48 +23,53 @@
  */
 package de.ralleytn.simple.vecmath;
 
+// ==== 10.03.2018 | Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
+// This class is generic to prevent the need for casting when using a matrix.
+// ====
+
 /**
- * The abstract representation of a matrix with undefined size.
+ * The abstract representation of a matrix.
  * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
  * @version 1.0.0
  * @since 1.0.0
+ * @param <T> the matrix type
  */
-public abstract class Matrix {
+public abstract class Matrix<T extends Matrix<T>> {
 
 	/**
 	 * 
 	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract Matrix identity();
+	public abstract T identity();
 	
 	/**
 	 * 
 	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract Matrix invert();
+	public abstract T invert();
 	
 	/**
 	 * 
 	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract Matrix negate();
+	public abstract T negate();
 	
 	/**
 	 * 
 	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract Matrix transpose();
+	public abstract T transpose();
 	
 	/**
 	 * 
 	 * @return
 	 * @since 1.0.0
 	 */
-	public abstract Matrix zero();
+	public abstract T zero();
 	
 	/**
 	 * 

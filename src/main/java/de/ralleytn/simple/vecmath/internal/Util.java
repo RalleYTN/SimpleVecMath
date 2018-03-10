@@ -21,49 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.ralleytn.simple.vecmath;
+package de.ralleytn.simple.vecmath.internal;
 
-public final class MatrixN extends Matrix<MatrixN> {
+/**
+ * Contains some utility methods for the {@cod de.ralleytn.simple.vecmath} module.
+ * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+public final class Util {
 
-	@Override
-	public final MatrixN identity() {
+	private Util() {};
+	
+	/**
+	 * Copies a {@code float} array.
+	 * @param array the {@code float} array that should be copied
+	 * @return the copy
+	 * @since 1.0.0
+	 */
+	public static final float[] copy(float[] array) {
 		
-		return null;
-	}
-
-	@Override
-	public final MatrixN invert() {
+		float[] copy = new float[array.length];
 		
-		return null;
-	}
-
-	@Override
-	public final MatrixN negate() {
+		for(int index = 0; index < copy.length; index++) {
+			
+			copy[index] = array[index];
+		}
 		
-		return null;
-	}
-
-	@Override
-	public final MatrixN transpose() {
-		
-		return null;
-	}
-
-	@Override
-	public final MatrixN zero() {
-		
-		return null;
-	}
-
-	@Override
-	public final float determinant() {
-		
-		return 0;
-	}
-
-	@Override
-	public final float[] toArray() {
-		
-		return null;
+		return copy;
 	}
 }
