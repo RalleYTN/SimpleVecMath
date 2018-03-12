@@ -200,15 +200,12 @@ public final class Vector4 extends Vector<Vector4> {
 
 	/**
 	 * 
-	 * @param quaternion
+	 * @param quat
 	 * @since 1.0.0
 	 */
-	public final void set(Quaternion quaternion) {
+	public final void set(Quaternion quat) {
 		
-		this.x = quaternion.x;
-		this.y = quaternion.y;
-		this.z = quaternion.z;
-		this.w = quaternion.w;
+		this.set(quat.x, quat.y, quat.z, quat.w);
 	}
 
 	/**
@@ -237,21 +234,21 @@ public final class Vector4 extends Vector<Vector4> {
 		this.x = data[0];
 		this.y = data[1];
 		
-		if(data.length > 1) this.z = data[2];
-		if(data.length > 2) this.w = data[3];
+		if(data.length > 1) this.z = data[2]; else this.z = 0.0F;
+		if(data.length > 2) this.w = data[3]; else this.w = 0.0F;
 	}
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public final void set(Vector4 vector) {
+	public final void set(Vector4 vec) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
-		this.z = vector.z;
-		this.w = vector.w;
+		this.x = vec.x;
+		this.y = vec.y;
+		this.z = vec.z;
+		this.w = vec.w;
 	}
 	
 	/**
@@ -263,21 +260,17 @@ public final class Vector4 extends Vector<Vector4> {
 	 */
 	public final void set(float x, float y, float z) {
 		
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.set(x, y, z, 0.0F);
 	}
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public final void set(Vector3 vector) {
+	public final void set(Vector3 vec) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
-		this.z = vector.z;
+		this.set(vec.x, vec.y, vec.z, 0.0F);
 	}
 	
 	/**
@@ -288,8 +281,7 @@ public final class Vector4 extends Vector<Vector4> {
 	 */
 	public final void set(float x, float y) {
 		
-		this.x = x;
-		this.y = y;
+		this.set(x, y, 0.0F, 0.0F);
 	}
 	
 	/**
@@ -299,8 +291,7 @@ public final class Vector4 extends Vector<Vector4> {
 	 */
 	public final void set(Vector2 vector) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
+		this.set(vector.x, vector.y, 0.0F, 0.0F);
 	}
 	
 	/**
@@ -331,20 +322,20 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param quaternion
+	 * @param quat
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 fromQuaternion(Quaternion quaternion) {
+	public final Vector4 fromQuaternion(Quaternion quat) {
 		
 		// This logic can calculate the angle without normalization.
     	// The direction of (x, y, z) and the sign of rotation cancel each other out and create a correct result.
 		
-		double sinA2 = Math.sqrt(quaternion.x * quaternion.x + quaternion.y * quaternion.y + quaternion.z * quaternion.z);
-    	this.w = (float)(2.0D * Math.atan2(sinA2, quaternion.w));
-    	this.x = (float)quaternion.x;
-    	this.y = (float)quaternion.y;
-    	this.z = (float)quaternion.z;
+		double sinA2 = Math.sqrt(quat.x * quat.x + quat.y * quat.y + quat.z * quat.z);
+    	this.w = (float)(2.0D * Math.atan2(sinA2, quat.w));
+    	this.x = (float)quat.x;
+    	this.y = (float)quat.y;
+    	this.z = (float)quat.z;
     	
     	return this;
 	}
@@ -448,10 +439,10 @@ public final class Vector4 extends Vector<Vector4> {
 	 */
 	public final Vector4 multiply(Matrix3 matrix) {
 		
-		this.x = this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02;
-		this.y = this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12;
-		this.z = this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22;
-		this.w = 0.0F;
+		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02,
+				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12,
+				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22,
+				 0.0F);
 		
 		return this;
 	}
@@ -463,11 +454,11 @@ public final class Vector4 extends Vector<Vector4> {
 	 * @since 1.0.0
 	 */
 	public final Vector4 multiply(Matrix4 matrix) {
-		
-		this.x = this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02 + this.w * matrix.m03;
-		this.y = this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12 + this.w * matrix.m13;
-		this.z = this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22 + this.w * matrix.m23;
-		this.w = this.x * matrix.m30 + this.y * matrix.m31 + this.z * matrix.m32 + this.w * matrix.m33;
+
+		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02 + this.w * matrix.m03,
+				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12 + this.w * matrix.m13,
+				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22 + this.w * matrix.m23,
+				 this.x * matrix.m30 + this.y * matrix.m31 + this.z * matrix.m32 + this.w * matrix.m33);
 		
 		return this;
 	}
@@ -532,10 +523,10 @@ public final class Vector4 extends Vector<Vector4> {
      */
     public final Vector4 project(Vector4 b) {
     	
-    	this.x = b.x / b.w;
-   	 	this.y = b.y / b.w;
-   	 	this.z = b.z / b.w;
-   	 	this.w = 1.0F;
+    	this.set(b.x / b.w,
+    			 b.y / b.w,
+    			 b.z / b.w,
+    			 1.0F);
    	 	
    	 	return this;
     }
@@ -549,13 +540,13 @@ public final class Vector4 extends Vector<Vector4> {
      */
     public final Vector4 interpolate(Vector4 b, float alpha) {
     	
-    	float beta = 1 - alpha;
+    	float beta = 1.0F - alpha;
     	
-    	this.x = beta * this.x + alpha * b.x;
-    	this.y = beta * this.y + alpha * b.y;
-    	this.z = beta * this.z + alpha * b.z;
-		this.w = beta * this.w + alpha * b.w;
-		
+    	this.set(beta * this.x + alpha * b.x,
+    			 beta * this.y + alpha * b.y,
+    			 beta * this.z + alpha * b.z,
+    			 beta * this.w + alpha * b.w);
+
 		return this;
     }
     
@@ -621,11 +612,8 @@ public final class Vector4 extends Vector<Vector4> {
 
 	@Override
 	public final Vector4 negate() {
-		
-		this.x = -this.x;
-		this.y = -this.y;
-		this.z = -this.z;
-		this.w = -this.w;
+
+		this.set(-this.x, -this.y, -this.z, -this.w);
 		
 		return this;
 	}
@@ -644,7 +632,13 @@ public final class Vector4 extends Vector<Vector4> {
 	@Override
 	public final float[] toArray() {
 		
-		return new float[] {this.x, this.y, this.z, this.w};
+		return new float[] {
+				
+			this.x,
+			this.y,
+			this.z,
+			this.w
+		};
 	}
 
 	@Override
@@ -659,8 +653,12 @@ public final class Vector4 extends Vector<Vector4> {
 		
 		if(object != null && object instanceof Vector4) {
 			
-			Vector4 vector = (Vector4)object;
-			return this.x == vector.x && this.y == vector.y && this.z == vector.z && this.w == vector.w;
+			Vector4 vec = (Vector4)object;
+			
+			return this.x == vec.x &&
+				   this.y == vec.y &&
+				   this.z == vec.z &&
+				   this.w == vec.w;
 		}
 		
 		return false;

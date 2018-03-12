@@ -51,25 +51,27 @@ public final class Matrix4 extends Matrix<Matrix4> {
 	 */
 	public Matrix4(float[] data) {
 		
-		this.m00 = data[0];
-		this.m01 = data[1];
-		this.m02 = data[2];
-		this.m03 = data[3];
+		this.set(data);
+	}
+	
+	/**
+	 * 
+	 * @param matrix
+	 * @since 1.0.0
+	 */
+	public Matrix4(Matrix4 matrix) {
 		
-		this.m10 = data[4];
-		this.m11 = data[5];
-		this.m12 = data[6];
-		this.m13 = data[7];
+		this.set(matrix);
+	}
+	
+	/**
+	 * 
+	 * @param matrix
+	 * @since 1.0.0
+	 */
+	public Matrix4(Matrix3 matrix) {
 		
-		this.m20 = data[8];
-		this.m21 = data[9];
-		this.m22 = data[10];
-		this.m23 = data[11];
-		
-		this.m30 = data[12];
-		this.m31 = data[13];
-		this.m32 = data[14];
-		this.m33 = data[15];
+		this.set(matrix);
 	}
 	
 	private static final float determinant3x3(float t00, float t01, float t02, float t10, float t11, float t12, float t20, float t21, float t22) {
@@ -78,107 +80,9 @@ public final class Matrix4 extends Matrix<Matrix4> {
              + t01 * (t12 * t20 - t10 * t22)
              + t02 * (t10 * t21 - t11 * t20);
 	}
-
-	/**
-	 * 
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final Matrix4 copy() {
-		
-		return new Matrix4(this.toArray());
-	}
 	
-	/**
-	 * 
-	 * @param matrix
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final Matrix4 add(Matrix4 matrix) {
+	private final void set(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33) {
 		
-		this.m00 += matrix.m00;
-		this.m01 += matrix.m01;
-		this.m02 += matrix.m02;
-		this.m03 += matrix.m03;
-		
-		this.m10 += matrix.m10;
-		this.m11 += matrix.m11;
-		this.m12 += matrix.m12;
-		this.m13 += matrix.m13;
-		
-		this.m20 += matrix.m20;
-		this.m21 += matrix.m21;
-		this.m22 += matrix.m22;
-		this.m23 += matrix.m23;
-		
-		this.m30 += matrix.m30;
-		this.m31 += matrix.m31;
-		this.m32 += matrix.m32;
-		this.m33 += matrix.m33;
-		
-		return this;
-	}
-	
-	/**
-	 * 
-	 * @param matrix
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final Matrix4 subtract(Matrix4 b) {
-		
-		this.m00 -= b.m00;
-		this.m01 -= b.m01;
-		this.m02 -= b.m02;
-		this.m03 -= b.m03;
-		
-		this.m10 -= b.m10;
-		this.m11 -= b.m11;
-		this.m12 -= b.m12;
-		this.m13 -= b.m13;
-		
-		this.m20 -= b.m20;
-		this.m21 -= b.m21;
-		this.m22 -= b.m22;
-		this.m23 -= b.m23;
-		
-		this.m30 -= b.m30;
-		this.m31 -= b.m31;
-		this.m32 -= b.m32;
-		this.m33 -= b.m33;
-		
-		return this;
-	}
-	
-	/**
-	 * 
-	 * @param matrix
-	 * @return
-	 * @since 1.0.0
-	 */
-	public final Matrix4 multiply(Matrix4 b) {
-		
-		float m00 = this.m00 * b.m00 + this.m10 * b.m01 + this.m20 * b.m02 + this.m30 * b.m03;
-		float m01 = this.m01 * b.m00 + this.m11 * b.m01 + this.m21 * b.m02 + this.m31 * b.m03;
-		float m02 = this.m02 * b.m00 + this.m12 * b.m01 + this.m22 * b.m02 + this.m32 * b.m03;
-		float m03 = this.m03 * b.m00 + this.m13 * b.m01 + this.m23 * b.m02 + this.m33 * b.m03;
-		
-		float m10 = this.m00 * b.m10 + this.m10 * b.m11 + this.m20 * b.m12 + this.m30 * b.m13;
-		float m11 = this.m01 * b.m10 + this.m11 * b.m11 + this.m21 * b.m12 + this.m31 * b.m13;
-		float m12 = this.m02 * b.m10 + this.m12 * b.m11 + this.m22 * b.m12 + this.m32 * b.m13;
-		float m13 = this.m03 * b.m10 + this.m13 * b.m11 + this.m23 * b.m12 + this.m33 * b.m13;
-		
-		float m20 = this.m00 * b.m20 + this.m10 * b.m21 + this.m20 * b.m22 + this.m30 * b.m23;
-		float m21 = this.m01 * b.m20 + this.m11 * b.m21 + this.m21 * b.m22 + this.m31 * b.m23;
-		float m22 = this.m02 * b.m20 + this.m12 * b.m21 + this.m22 * b.m22 + this.m32 * b.m23;
-		float m23 = this.m03 * b.m20 + this.m13 * b.m21 + this.m23 * b.m22 + this.m33 * b.m23;
-		
-		float m30 = this.m00 * b.m30 + this.m10 * b.m31 + this.m20 * b.m32 + this.m30 * b.m33;
-		float m31 = this.m01 * b.m30 + this.m11 * b.m31 + this.m21 * b.m32 + this.m31 * b.m33;
-		float m32 = this.m02 * b.m30 + this.m12 * b.m31 + this.m22 * b.m32 + this.m32 * b.m33;
-		float m33 = this.m03 * b.m30 + this.m13 * b.m31 + this.m23 * b.m32 + this.m33 * b.m33;
-
 		this.m00 = m00;
 		this.m01 = m01;
 		this.m02 = m02;
@@ -198,7 +102,114 @@ public final class Matrix4 extends Matrix<Matrix4> {
 		this.m31 = m31;
 		this.m32 = m32;
 		this.m33 = m33;
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @since 1.0.0
+	 */
+	public final void set(float[] data) {
+
+		this.set(data[0],  data[1],  data[2],  data[3],
+				 data[4],  data[5],  data[6],  data[7],
+				 data[8],  data[9],  data[10], data[11],
+				 data[12], data[13], data[14], data[15]);
+	}
+	
+	/**
+	 * 
+	 * @param matrix
+	 * @since 1.0.0
+	 */
+	public final void set(Matrix4 matrix) {
 		
+		this.set(matrix.m00, matrix.m01, matrix.m02, matrix.m03,
+				 matrix.m10, matrix.m11, matrix.m12, matrix.m13,
+				 matrix.m20, matrix.m21, matrix.m22, matrix.m23,
+				 matrix.m30, matrix.m31, matrix.m32, matrix.m33);
+	}
+	
+	/**
+	 * 
+	 * @param matrix
+	 * @since 1.0.0
+	 */
+	public final void set(Matrix3 matrix) {
+		
+		this.set(matrix.m00, matrix.m01, matrix.m02, 0.0F,
+				 matrix.m10, matrix.m11, matrix.m12, 0.0F,
+				 matrix.m20, matrix.m21, matrix.m22, 0.0F,
+				 0.0F,       0.0F,       0.0F,       0.0F);
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Matrix4 copy() {
+		
+		return new Matrix4(this);
+	}
+	
+	/**
+	 * 
+	 * @param b
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Matrix4 add(Matrix4 b) {
+		
+		this.set(this.m00 + b.m00, this.m01 + b.m01, this.m02 + b.m02, this.m03 + b.m03,
+				 this.m10 + b.m10, this.m11 + b.m11, this.m12 + b.m12, this.m13 + b.m13,
+				 this.m20 + b.m20, this.m21 + b.m21, this.m22 + b.m22, this.m23 + b.m23,
+				 this.m30 + b.m30, this.m31 + b.m31, this.m32 + b.m32, this.m33 + b.m33);
+		
+		return this;
+	}
+	
+	/**
+	 * 
+	 * @param b
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Matrix4 subtract(Matrix4 b) {
+		
+		this.set(this.m00 - b.m00, this.m01 - b.m01, this.m02 - b.m02, this.m03 - b.m03,
+				 this.m10 - b.m10, this.m11 - b.m11, this.m12 - b.m12, this.m13 - b.m13,
+				 this.m20 - b.m20, this.m21 - b.m21, this.m22 - b.m22, this.m23 - b.m23,
+				 this.m30 - b.m30, this.m31 - b.m31, this.m32 - b.m32, this.m33 - b.m33);
+		
+		return this;
+	}
+	
+	/**
+	 * 
+	 * @param b
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Matrix4 multiply(Matrix4 b) {
+		
+		this.set(this.m00 * b.m00 + this.m10 * b.m01 + this.m20 * b.m02 + this.m30 * b.m03,
+				 this.m01 * b.m00 + this.m11 * b.m01 + this.m21 * b.m02 + this.m31 * b.m03,
+				 this.m02 * b.m00 + this.m12 * b.m01 + this.m22 * b.m02 + this.m32 * b.m03,
+				 this.m03 * b.m00 + this.m13 * b.m01 + this.m23 * b.m02 + this.m33 * b.m03,
+				 this.m00 * b.m10 + this.m10 * b.m11 + this.m20 * b.m12 + this.m30 * b.m13,
+				 this.m01 * b.m10 + this.m11 * b.m11 + this.m21 * b.m12 + this.m31 * b.m13,
+				 this.m02 * b.m10 + this.m12 * b.m11 + this.m22 * b.m12 + this.m32 * b.m13,
+				 this.m03 * b.m10 + this.m13 * b.m11 + this.m23 * b.m12 + this.m33 * b.m13,
+				 this.m00 * b.m20 + this.m10 * b.m21 + this.m20 * b.m22 + this.m30 * b.m23,
+				 this.m01 * b.m20 + this.m11 * b.m21 + this.m21 * b.m22 + this.m31 * b.m23,
+				 this.m02 * b.m20 + this.m12 * b.m21 + this.m22 * b.m22 + this.m32 * b.m23,
+				 this.m03 * b.m20 + this.m13 * b.m21 + this.m23 * b.m22 + this.m33 * b.m23,
+				 this.m00 * b.m30 + this.m10 * b.m31 + this.m20 * b.m32 + this.m30 * b.m33,
+				 this.m01 * b.m30 + this.m11 * b.m31 + this.m21 * b.m32 + this.m31 * b.m33,
+				 this.m02 * b.m30 + this.m12 * b.m31 + this.m22 * b.m32 + this.m32 * b.m33,
+				 this.m03 * b.m30 + this.m13 * b.m31 + this.m23 * b.m32 + this.m33 * b.m33);
+
 		return this;
 	}
 	
@@ -209,13 +220,11 @@ public final class Matrix4 extends Matrix<Matrix4> {
 	 * @since 1.0.0
 	 */
 	public final Vector4 transform(Vector4 vector) {
-		
-		float x = this.m00 * vector.x + this.m10 * vector.y + this.m20 * vector.z + this.m30 * vector.w;
-		float y = this.m01 * vector.x + this.m11 * vector.y + this.m21 * vector.z + this.m31 * vector.w;
-		float z = this.m02 * vector.x + this.m12 * vector.y + this.m22 * vector.z + this.m32 * vector.w;
-		float w = this.m03 * vector.x + this.m13 * vector.y + this.m23 * vector.z + this.m33 * vector.w;
-		
-		return new Vector4(x, y, z, w);
+
+		return new Vector4(this.m00 * vector.x + this.m10 * vector.y + this.m20 * vector.z + this.m30 * vector.w,
+						   this.m01 * vector.x + this.m11 * vector.y + this.m21 * vector.z + this.m31 * vector.w,
+						   this.m02 * vector.x + this.m12 * vector.y + this.m22 * vector.z + this.m32 * vector.w,
+						   this.m03 * vector.x + this.m13 * vector.y + this.m23 * vector.z + this.m33 * vector.w);
 	}
 	
 	/**
@@ -255,7 +264,9 @@ public final class Matrix4 extends Matrix<Matrix4> {
 		
 		float c = (float)Math.cos(angle);
 		float s = (float)Math.sin(angle);
+		
 		float oneminusc = 1.0F - c;
+		
 		float xy = axis.getX() * axis.getY();
 		float yz = axis.getY() * axis.getZ();
 		float xz = axis.getX() * axis.getZ();
@@ -263,7 +274,7 @@ public final class Matrix4 extends Matrix<Matrix4> {
 		float ys = axis.getY() * s;
 		float zs = axis.getZ() * s;
 		
-		float f00 = axis.getX() * axis.getX() * oneminusc+c;
+		float f00 = axis.getX() * axis.getX() * oneminusc + c;
 		float f01 = xy * oneminusc + zs;
 		float f02 = xz * oneminusc - ys;
 		
@@ -274,31 +285,20 @@ public final class Matrix4 extends Matrix<Matrix4> {
 		float f20 = xz * oneminusc + ys;
 		float f21 = yz * oneminusc - xs;
 		float f22 = axis.getZ() * axis.getZ() * oneminusc + c;
-		
-		float t00 = this.m00 * f00 + this.m10 * f01 + this.m20 * f02;
-		float t01 = this.m01 * f00 + this.m11 * f01 + this.m21 * f02;
-		float t02 = this.m02 * f00 + this.m12 * f01 + this.m22 * f02;
-		float t03 = this.m03 * f00 + this.m13 * f01 + this.m23 * f02;
-		
-		float t10 = this.m00 * f10 + this.m10 * f11 + this.m20 * f12;
-		float t11 = this.m01 * f10 + this.m11 * f11 + this.m21 * f12;
-		float t12 = this.m02 * f10 + this.m12 * f11 + this.m22 * f12;
-		float t13 = this.m03 * f10 + this.m13 * f11 + this.m23 * f12;
-		
-		this.m20 = this.m00 * f20 + this.m10 * f21 + this.m20 * f22;
-		this.m21 = this.m01 * f20 + this.m11 * f21 + this.m21 * f22;
-		this.m22 = this.m02 * f20 + this.m12 * f21 + this.m22 * f22;
-		this.m23 = this.m03 * f20 + this.m13 * f21 + this.m23 * f22;
-		
-		this.m00 = t00;
-		this.m01 = t01;
-		this.m02 = t02;
-		this.m03 = t03;
-		
-		this.m10 = t10;
-		this.m11 = t11;
-		this.m12 = t12;
-		this.m13 = t13;
+
+		this.set(this.m00 * f00 + this.m10 * f01 + this.m20 * f02,
+				 this.m01 * f00 + this.m11 * f01 + this.m21 * f02,
+				 this.m02 * f00 + this.m12 * f01 + this.m22 * f02,
+				 this.m03 * f00 + this.m13 * f01 + this.m23 * f02,
+				 this.m00 * f10 + this.m10 * f11 + this.m20 * f12,
+				 this.m01 * f10 + this.m11 * f11 + this.m21 * f12,
+				 this.m02 * f10 + this.m12 * f11 + this.m22 * f12,
+				 this.m03 * f10 + this.m13 * f11 + this.m23 * f12,
+				 this.m00 * f20 + this.m10 * f21 + this.m20 * f22,
+				 this.m01 * f20 + this.m11 * f21 + this.m21 * f22,
+				 this.m02 * f20 + this.m12 * f21 + this.m22 * f22,
+				 this.m03 * f20 + this.m13 * f21 + this.m23 * f22,
+			     this.m30, this.m31, this.m32, this.m33);
 		
 		return this;
 	}
@@ -343,85 +343,59 @@ public final class Matrix4 extends Matrix<Matrix4> {
 		return this.scale(new Vector3(scale, scale, scale));
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Matrix3 toMatrix3() {
+		
+		return new Matrix3(this);
+	}
+	
 	@Override
 	public final float determinant() {
 		
-		float determinant = this.m00 * ((this.m11 * this.m22 * this.m33 + this.m12 * this.m23 * this.m31 + this.m13 * this.m21 * this.m32) - this.m13 * this.m22 * this.m31 - this.m11 * this.m23 * this.m32 - this.m12 * this.m21 * this.m33);
-		determinant -= this.m01 * ((this.m10 * this.m22 * this.m33 + this.m12 * this.m23 * this.m30 + this.m13 * this.m20 * this.m32) - this.m13 * this.m22 * this.m30 - this.m10 * this.m23 * this.m32 - this.m12 * this.m20 * this.m33);
-		determinant += this.m02 * ((this.m10 * this.m21 * this.m33 + this.m11 * this.m23 * this.m30 + this.m13 * this.m20 * this.m31) - this.m13 * this.m21 * this.m30 - this.m10 * this.m23 * this.m31 - this.m11 * this.m20 * this.m33);
-		determinant -= this.m03 * ((this.m10 * this.m21 * this.m32 + this.m11 * this.m22 * this.m30 + this.m12 * this.m20 * this.m31) - this.m12 * this.m21 * this.m30 - this.m10 * this.m22 * this.m31 - this.m11 * this.m20 * this.m32);
+		float determinant =  this.m00 * ((this.m11 * this.m22 * this.m33 + this.m12 * this.m23 * this.m31 + this.m13 * this.m21 * this.m32) - this.m13 * this.m22 * this.m31 - this.m11 * this.m23 * this.m32 - this.m12 * this.m21 * this.m33);
+			  determinant -= this.m01 * ((this.m10 * this.m22 * this.m33 + this.m12 * this.m23 * this.m30 + this.m13 * this.m20 * this.m32) - this.m13 * this.m22 * this.m30 - this.m10 * this.m23 * this.m32 - this.m12 * this.m20 * this.m33);
+			  determinant += this.m02 * ((this.m10 * this.m21 * this.m33 + this.m11 * this.m23 * this.m30 + this.m13 * this.m20 * this.m31) - this.m13 * this.m21 * this.m30 - this.m10 * this.m23 * this.m31 - this.m11 * this.m20 * this.m33);
+			  determinant -= this.m03 * ((this.m10 * this.m21 * this.m32 + this.m11 * this.m22 * this.m30 + this.m12 * this.m20 * this.m31) - this.m12 * this.m21 * this.m30 - this.m10 * this.m22 * this.m31 - this.m11 * this.m20 * this.m32);
 	
 		return determinant;
 	}
 	
 	@Override
 	public final Matrix4 invert() {
-		
-		float determinant = this.determinant();
-		float determinant_inv = 1.0F / determinant;
 
-		float t00 =  Matrix4.determinant3x3(this.m11, this.m12, this.m13, this.m21, this.m22, this.m23, this.m31, this.m32, this.m33);
-		float t01 = -Matrix4.determinant3x3(this.m10, this.m12, this.m13, this.m20, this.m22, this.m23, this.m30, this.m32, this.m33);
-		float t02 =  Matrix4.determinant3x3(this.m10, this.m11, this.m13, this.m20, this.m21, this.m23, this.m30, this.m31, this.m33);
-		float t03 = -Matrix4.determinant3x3(this.m10, this.m11, this.m12, this.m20, this.m21, this.m22, this.m30, this.m31, this.m32);
+		float invertedDeterminant = 1.0F / this.determinant();
 		
-		float t10 = -Matrix4.determinant3x3(this.m01, this.m02, this.m03, this.m21, this.m22, this.m23, this.m31, this.m32, this.m33);
-		float t11 =  Matrix4.determinant3x3(this.m00, this.m02, this.m03, this.m20, this.m22, this.m23, this.m30, this.m32, this.m33);
-		float t12 = -Matrix4.determinant3x3(this.m00, this.m01, this.m03, this.m20, this.m21, this.m23, this.m30, this.m31, this.m33);
-		float t13 =  Matrix4.determinant3x3(this.m00, this.m01, this.m02, this.m20, this.m21, this.m22, this.m30, this.m31, this.m32);
-		
-		float t20 =  Matrix4.determinant3x3(this.m01, this.m02, this.m03, this.m11, this.m12, this.m13, this.m31, this.m32, this.m33);
-		float t21 = -Matrix4.determinant3x3(this.m00, this.m02, this.m03, this.m10, this.m12, this.m13, this.m30, this.m32, this.m33);
-		float t22 =  Matrix4.determinant3x3(this.m00, this.m01, this.m03, this.m10, this.m11, this.m13, this.m30, this.m31, this.m33);
-		float t23 = -Matrix4.determinant3x3(this.m00, this.m01, this.m02, this.m10, this.m11, this.m12, this.m30, this.m31, this.m32);
-		
-		float t30 = -Matrix4.determinant3x3(this.m01, this.m02, this.m03, this.m11, this.m12, this.m13, this.m21, this.m22, this.m23);
-		float t31 =  Matrix4.determinant3x3(this.m00, this.m02, this.m03, this.m10, this.m12, this.m13, this.m20, this.m22, this.m23);
-		float t32 = -Matrix4.determinant3x3(this.m00, this.m01, this.m03, this.m10, this.m11, this.m13, this.m20, this.m21, this.m23);
-		float t33 =  Matrix4.determinant3x3(this.m00, this.m01, this.m02, this.m10, this.m11, this.m12, this.m20, this.m21, this.m22);
+		this.set(Matrix4.determinant3x3(this.m11, this.m12, this.m13, this.m21, this.m22, this.m23, this.m31, this.m32, this.m33) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m01, this.m02, this.m03, this.m21, this.m22, this.m23, this.m31, this.m32, this.m33) * invertedDeterminant,
+				 Matrix4.determinant3x3(this.m01, this.m02, this.m03, this.m11, this.m12, this.m13, this.m31, this.m32, this.m33) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m01, this.m02, this.m03, this.m11, this.m12, this.m13, this.m21, this.m22, this.m23) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m10, this.m12, this.m13, this.m20, this.m22, this.m23, this.m30, this.m32, this.m33) * invertedDeterminant,
+				 Matrix4.determinant3x3(this.m00, this.m02, this.m03, this.m20, this.m22, this.m23, this.m30, this.m32, this.m33) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m00, this.m02, this.m03, this.m10, this.m12, this.m13, this.m30, this.m32, this.m33) * invertedDeterminant,
+				 Matrix4.determinant3x3(this.m00, this.m02, this.m03, this.m10, this.m12, this.m13, this.m20, this.m22, this.m23) * invertedDeterminant,
+				 Matrix4.determinant3x3(this.m10, this.m11, this.m13, this.m20, this.m21, this.m23, this.m30, this.m31, this.m33) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m00, this.m01, this.m03, this.m20, this.m21, this.m23, this.m30, this.m31, this.m33) * invertedDeterminant,
+				 Matrix4.determinant3x3(this.m00, this.m01, this.m03, this.m10, this.m11, this.m13, this.m30, this.m31, this.m33) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m00, this.m01, this.m03, this.m10, this.m11, this.m13, this.m20, this.m21, this.m23) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m10, this.m11, this.m12, this.m20, this.m21, this.m22, this.m30, this.m31, this.m32) * invertedDeterminant,
+				 Matrix4.determinant3x3(this.m00, this.m01, this.m02, this.m20, this.m21, this.m22, this.m30, this.m31, this.m32) * invertedDeterminant,
+				-Matrix4.determinant3x3(this.m00, this.m01, this.m02, this.m10, this.m11, this.m12, this.m30, this.m31, this.m32) * invertedDeterminant,
+				 Matrix4.determinant3x3(this.m00, this.m01, this.m02, this.m10, this.m11, this.m12, this.m20, this.m21, this.m22) * invertedDeterminant);
 
-		this.m00 = t00 * determinant_inv;
-		this.m11 = t11 * determinant_inv;
-		this.m22 = t22 * determinant_inv;
-		this.m33 = t33 * determinant_inv;
-		this.m01 = t10 * determinant_inv;
-		this.m10 = t01 * determinant_inv;
-		this.m20 = t02 * determinant_inv;
-		this.m02 = t20 * determinant_inv;
-		this.m12 = t21 * determinant_inv;
-		this.m21 = t12 * determinant_inv;
-		this.m03 = t30 * determinant_inv;
-		this.m30 = t03 * determinant_inv;
-		this.m13 = t31 * determinant_inv;
-		this.m31 = t13 * determinant_inv;
-		this.m32 = t23 * determinant_inv;
-		this.m23 = t32 * determinant_inv;
-			
 		return this;
 	}
 	
 	@Override
 	public final Matrix4 negate() {
 		
-		this.m00 = -this.m00;
-		this.m01 = -this.m01;
-		this.m02 = -this.m02;
-		this.m03 = -this.m03;
-		
-		this.m10 = -this.m10;
-		this.m11 = -this.m11;
-		this.m12 = -this.m12;
-		this.m13 = -this.m13;
-		
-		this.m20 = -this.m20;
-		this.m21 = -this.m21;
-		this.m22 = -this.m22;
-		this.m23 = -this.m23;
-		
-		this.m30 = -this.m30;
-		this.m31 = -this.m31;
-		this.m32 = -this.m32;
-		this.m33 = -this.m33;
+		this.set(-this.m00, -this.m01, -this.m02, -this.m03,
+				 -this.m10, -this.m11, -this.m12, -this.m13,
+				 -this.m20, -this.m21, -this.m22, -this.m23,
+				 -this.m30, -this.m31, -this.m32, -this.m33);
 		
 		return this;
 	}
@@ -429,25 +403,10 @@ public final class Matrix4 extends Matrix<Matrix4> {
 	@Override
 	public final Matrix4 identity() {
 		
-		this.m00 = 1.0F;
-		this.m01 = 0.0F;
-		this.m02 = 0.0F;
-		this.m03 = 0.0F;
-		
-		this.m10 = 0.0F;
-		this.m11 = 1.0F;
-		this.m12 = 0.0F;
-		this.m13 = 0.0F;
-		
-		this.m20 = 0.0F;
-		this.m21 = 0.0F;
-		this.m22 = 1.0F;
-		this.m23 = 0.0F;
-		
-		this.m30 = 0.0F;
-		this.m31 = 0.0F;
-		this.m32 = 0.0F;
-		this.m33 = 1.0F;
+		this.set(1, 0, 0, 0,
+				 0, 1, 0, 0,
+				 0, 0, 1, 0,
+				 0, 0, 0, 1);
 		
 		return this;
 	}
@@ -455,25 +414,10 @@ public final class Matrix4 extends Matrix<Matrix4> {
 	@Override
 	public final Matrix4 zero() {
 		
-		this.m00 = 0.0F;
-		this.m01 = 0.0F;
-		this.m02 = 0.0F;
-		this.m03 = 0.0F;
-		
-		this.m10 = 0.0F;
-		this.m11 = 0.0F;
-		this.m12 = 0.0F;
-		this.m13 = 0.0F;
-		
-		this.m20 = 0.0F;
-		this.m21 = 0.0F;
-		this.m22 = 0.0F;
-		this.m23 = 0.0F;
-		
-		this.m30 = 0.0F;
-		this.m31 = 0.0F;
-		this.m32 = 0.0F;
-		this.m33 = 0.0F;
+		this.set(0, 0, 0, 0,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0);
 		
 		return this;
 	}
@@ -481,39 +425,10 @@ public final class Matrix4 extends Matrix<Matrix4> {
 	@Override
 	public final Matrix4 transpose() {
 		
-		float m00 = this.m00;
-		float m01 = this.m10;
-		float m02 = this.m20;
-		float m03 = this.m30;
-		float m10 = this.m01;
-		float m11 = this.m11;
-		float m12 = this.m21;
-		float m13 = this.m31;
-		float m20 = this.m02;
-		float m21 = this.m12;
-		float m22 = this.m22;
-		float m23 = this.m32;
-		float m30 = this.m03;
-		float m31 = this.m13;
-		float m32 = this.m23;
-		float m33 = this.m33;
-
-		this.m00 = m00;
-		this.m01 = m01;
-		this.m02 = m02;
-		this.m03 = m03;
-		this.m10 = m10;
-		this.m11 = m11;
-		this.m12 = m12;
-		this.m13 = m13;
-		this.m20 = m20;
-		this.m21 = m21;
-		this.m22 = m22;
-		this.m23 = m23;
-		this.m30 = m30;
-		this.m31 = m31;
-		this.m32 = m32;
-		this.m33 = m33;
+		this.set(this.m00, this.m10, this.m20, this.m30,
+				 this.m01, this.m11, this.m21, this.m31,
+				 this.m02, this.m12, this.m22, this.m32,
+				 this.m03, this.m13, this.m23, this.m33);
 		
 		return this;
 	}
@@ -529,6 +444,27 @@ public final class Matrix4 extends Matrix<Matrix4> {
 			this.m30, this.m31, this.m32, this.m33
 		};
 	}
+	
+    @Override
+    public final int hashCode() {
+	
+    	return Float.floatToIntBits(this.m00) ^
+    		   Float.floatToIntBits(this.m01) ^
+    		   Float.floatToIntBits(this.m02) ^
+    		   Float.floatToIntBits(this.m03) ^
+               Float.floatToIntBits(this.m10) ^
+               Float.floatToIntBits(this.m11) ^
+               Float.floatToIntBits(this.m12) ^
+               Float.floatToIntBits(this.m13) ^
+               Float.floatToIntBits(this.m20) ^
+               Float.floatToIntBits(this.m21) ^
+               Float.floatToIntBits(this.m22) ^
+               Float.floatToIntBits(this.m23) ^
+               Float.floatToIntBits(this.m30) ^
+               Float.floatToIntBits(this.m31) ^
+               Float.floatToIntBits(this.m32) ^
+               Float.floatToIntBits(this.m33);
+    }
 	
 	@Override
 	public final String toString() {

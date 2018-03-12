@@ -23,8 +23,33 @@
  */
 package de.ralleytn.simple.vecmath;
 
+/**
+ * 
+ * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public final class MatrixN extends Matrix<MatrixN> {
 
+	// first Y then X to keep it consistent with the other matrices
+	
+	private int width;
+	private int height;
+	private float[][] data;
+	
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @since 1.0.0
+	 */
+	public MatrixN(int width, int height) {
+		
+		this.width = width;
+		this.height = height;
+		this.data = new float[height][width];
+	}
+	
 	@Override
 	public final MatrixN identity() {
 		
@@ -40,7 +65,15 @@ public final class MatrixN extends Matrix<MatrixN> {
 	@Override
 	public final MatrixN negate() {
 		
-		return null;
+		for(int y = 0; y < this.height; y++) {
+			
+			for(int x = 0; x < this.width; x++) {
+				
+				this.data[y][x] = -this.data[y][x];
+			}
+		}
+		
+		return this;
 	}
 
 	@Override
@@ -52,7 +85,15 @@ public final class MatrixN extends Matrix<MatrixN> {
 	@Override
 	public final MatrixN zero() {
 		
-		return null;
+		for(int y = 0; y < this.height; y++) {
+			
+			for(int x = 0; x < this.width; x++) {
+				
+				this.data[y][x] = 0.0F;
+			}
+		}
+		
+		return this;
 	}
 
 	@Override
@@ -64,6 +105,38 @@ public final class MatrixN extends Matrix<MatrixN> {
 	@Override
 	public final float[] toArray() {
 		
-		return null;
+		float[] array = new float[this.width * this.height];
+		int index = 0;
+		
+		for(int y = 0; y < this.height; y++) {
+			
+			for(int x = 0; x < this.width; x++) {
+				
+				array[index] = this.data[y][x];
+				index++;
+			}
+		}
+		
+		return array;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final int getWidth() {
+		
+		return this.width;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final int getHeight() {
+		
+		return this.height;
 	}
 }

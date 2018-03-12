@@ -1,5 +1,9 @@
 # Description
 
+This is a simple to use vector math library written in pure Java.
+It is completely documented and was designed to be consistent.
+Unit tests cover nearly 100% of the code.
+
 ## Changelog
 
 ### Version 1.0.0

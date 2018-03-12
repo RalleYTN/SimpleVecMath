@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import de.ralleytn.simple.vecmath.Matrix3;
+import de.ralleytn.simple.vecmath.Matrix4;
 import de.ralleytn.simple.vecmath.Quaternion;
 import de.ralleytn.simple.vecmath.Vector2;
 import de.ralleytn.simple.vecmath.Vector3;
@@ -149,7 +151,9 @@ class Vector2Test {
 	@Test
 	void testCross() {
 		
-		
+		Vector2 a = new Vector2(100, 50);
+		Vector2 b = new Vector2(24, 300);
+		assertEquals(28800.0F, a.cross(b));
 	}
 	
 	@Test
@@ -185,19 +189,36 @@ class Vector2Test {
 	@Test
 	void testNormalize() {
 		
-		
+		for(int index = 0; index < 100; index++) {
+			
+			Vector2 a = createRandomVector().normalize();
+			float length = a.length();
+			assertTrue(length > 0.999999F && length < 1.000001F, String.valueOf(length));
+		}
 	}
 	
 	@Test
 	void testEquals() {
 		
+		Vector2 a = new Vector2(1, 1);
+		Vector2 b = a.copy();
+		Vector2 c = new Vector2(1, 1);
 		
+		assertEquals(a, b);
+		assertEquals(a, c);
+		assertEquals(c, b);
 	}
 	
 	@Test
 	void testAbsolute() {
 		
+		Vector2 a = new Vector2(-1, 1).absolute();
+		Vector2 b = a.negate().absolute();
+		Vector2 c = new Vector2(-1, -1).absolute();
 		
+		assertTrue(a.x >= 0 && a.y >= 0);
+		assertTrue(b.x >= 0 && b.y >= 0);
+		assertTrue(c.x >= 0 && c.y >= 0);
 	}
 	
 	@Test
@@ -221,6 +242,7 @@ class Vector2Test {
 	@Test
 	void testLength() {
 		
+		// Since the library uses floats, the calculations are not always exact and rounding errors occur.
 		
 	}
 	
@@ -251,21 +273,33 @@ class Vector2Test {
 	@Test
 	void testMultiply() {
 		
+		// Test normal vector multiplication
+		Vector2 a = new Vector2(2.2F, 4.4F);
+		Vector2 b = new Vector2(0.5F, 0.5F);
+		a.multiply(b);
 		
+		assertEquals(1.1F, a.x);
+		assertEquals(2.2F, a.y);
+		
+		// Test matrix multiplication
+		Vector2 c = new Vector2(2, 1);
+		Vector2 d = c.copy();
+		Matrix3 mat3 = new Matrix3(new float[] {
+			1, -1, 2,
+			0, -3, 1,
+			0, 0, 0
+		});
+		Matrix4 mat4 = mat3.toMatrix4();
+		c.multiply(mat3);
+		d.multiply(mat4);
+		
+		assertEquals(1.0F, c.x);
+		assertEquals(-3.0F, c.y);
+		assertEquals(1.0F, d.x);
+		assertEquals(-3.0F, d.y);
+		assertEquals(c, d);
 	}
-	
-	@Test
-	void testGetX() {
-		
-		
-	}
-	
-	@Test
-	void testGetY() {
-		
-		
-	}
-	
+
 	@Test
 	void testDistanceSquared() {
 		

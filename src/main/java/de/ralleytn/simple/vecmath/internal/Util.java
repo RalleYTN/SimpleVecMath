@@ -24,7 +24,7 @@
 package de.ralleytn.simple.vecmath.internal;
 
 /**
- * Contains some utility methods for the {@cod de.ralleytn.simple.vecmath} module.
+ * Contains some utility methods for the {@code de.ralleytn.simple.vecmath} module.
  * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
  * @version 1.0.0
  * @since 1.0.0

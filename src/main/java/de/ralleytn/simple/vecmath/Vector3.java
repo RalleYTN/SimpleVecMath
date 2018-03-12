@@ -127,13 +127,7 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final void set(float[] data) {
 		
-		this.x = data[0];
-		this.y = data[1];
-		
-		if(data.length > 1) {
-			
-			this.z = data[2];
-		}
+		this.set(data[0], data[1], data.length > 2 ? data[2] : 0.0F);
 	}
 	
 	/**
@@ -157,9 +151,7 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final void set(Vector3 vector) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
-		this.z = vector.z;
+		this.set(vector.x, vector.y, vector.z);
 	}
 	
 	/**
@@ -170,8 +162,7 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final void set(float x, float y) {
 		
-		this.x = x;
-		this.y = y;
+		this.set(x, y, 0.0F);
 	}
 	
 	/**
@@ -181,8 +172,7 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final void set(Vector2 vector) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
+		this.set(vector.x, vector.y, 0.0F);
 	}
 	
 	/**
@@ -242,9 +232,9 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final Vector3 cross(Vector3 b) {
 		
-		this.x = this.y * b.z - this.z * b.y;
-		this.y = b.x * this.z - b.z * this.x;
-		this.z = this.x * b.y - this.y * b.x;
+		this.set(this.y * b.z - this.z * b.y,
+				 b.x * this.z - b.z * this.x,
+				 this.x * b.y - this.y * b.x);
 		
 		return this;
 	}
@@ -358,11 +348,11 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final Vector3 project(Vector4 b) {
 		
-		 this.x = b.x / b.w;
-    	 this.y = b.y / b.w;
-    	 this.z = b.z / b.w;
+		this.set(b.x / b.w,
+				 b.y / b.w,
+				 b.z / b.w);
     	 
-    	 return this;
+    	return this;
 	}
 	
 	/**
@@ -374,9 +364,9 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final Vector3 multiply(Matrix3 matrix) {
 		
-		this.x = this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02;
-		this.y = this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12;
-		this.z = this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22;
+		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02,
+				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12,
+				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22);
 		
 		return this;
 	}
@@ -390,9 +380,9 @@ public final class Vector3 extends Vector<Vector3> {
 	 */
 	public final Vector3 multiply(Matrix4 matrix) {
 		
-		this.x = this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02;
-		this.y = this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12;
-		this.z = this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22;
+		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02,
+				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12,
+				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22);
 		
 		return this;
 	}
@@ -496,9 +486,7 @@ public final class Vector3 extends Vector<Vector3> {
 	@Override
 	public final Vector3 negate() {
 		
-		this.x = -this.x;
-		this.y = -this.y;
-		this.z = -this.z;
+		this.set(-this.x, -this.y, -this.z);
 
 		return this;
 	}

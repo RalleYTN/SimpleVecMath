@@ -99,8 +99,7 @@ public final class Vector2 extends Vector<Vector2> {
 	 */
 	public final void set(Vector2 vector) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
+		this.set(vector.x, vector.y);
 	}
 	
 	/**
@@ -110,8 +109,7 @@ public final class Vector2 extends Vector<Vector2> {
 	 */
 	public final void set(float[] data) {
 		
-		this.x = data[0];
-		this.y = data[1];
+		this.set(data[0], data[1]);
 	}
 	
 	/**
@@ -167,10 +165,8 @@ public final class Vector2 extends Vector<Vector2> {
 	 */
 	public final Vector2 rotate(float angle) {
 
-		float x = this.x;
-		
-		this.x = (float)(x * Math.cos(angle) - this.y * Math.sin(angle));
-		this.y = (float)(x * Math.sin(angle) + this.y * Math.cos(angle));
+		this.set((float)(this.x * Math.cos(angle) - this.y * Math.sin(angle)),
+				 (float)(this.x * Math.sin(angle) + this.y * Math.cos(angle)));
 		
 		return this;
 	}
@@ -183,8 +179,7 @@ public final class Vector2 extends Vector<Vector2> {
 	 */
 	public final Vector2 turnLeft() {
 		
-		this.y = this.x;
-		this.x = -this.y;
+		this.set(-this.y, this.x);
 		
 		return this;
 	}
@@ -197,8 +192,7 @@ public final class Vector2 extends Vector<Vector2> {
 	 */
 	public final Vector2 turnRight() {
 		
-		this.x = this.y;
-		this.y = -this.x;
+		this.set(this.y, -this.x);
 		
 		return this;
 	}
@@ -257,8 +251,8 @@ public final class Vector2 extends Vector<Vector2> {
 	 */
 	public final Vector2 multiply(Matrix3 matrix) {
 		
-		this.x = this.x * matrix.m00 + this.y * matrix.m01;
-		this.y = this.x * matrix.m10 + this.y * matrix.m11;
+		this.set(this.x * matrix.m00 + this.y * matrix.m01,
+				 this.x * matrix.m10 + this.y * matrix.m11);
 		
 		return this;
 	}
@@ -271,9 +265,9 @@ public final class Vector2 extends Vector<Vector2> {
 	 * @since 1.0.0
 	 */
 	public final Vector2 multiply(Matrix4 matrix) {
-		
-		this.x = this.x * matrix.m00 + this.y * matrix.m01;
-		this.y = this.x * matrix.m10 + this.y * matrix.m11;
+
+		this.set(this.x * matrix.m00 + this.y * matrix.m01,
+				 this.x * matrix.m10 + this.y * matrix.m11);
 		
 		return this;
 	}
@@ -432,8 +426,7 @@ public final class Vector2 extends Vector<Vector2> {
 	@Override
 	public final Vector2 negate() {
 		
-		this.x = -this.x;
-		this.y = -this.y;
+		this.set(-this.x, -this.y);
 
 		return this;
 	}
@@ -450,7 +443,11 @@ public final class Vector2 extends Vector<Vector2> {
 	@Override
 	public final float[] toArray() {
 		
-		return new float[] {this.x, this.y};
+		return new float[] {
+				
+			this.x,
+			this.y
+		};
 	}
 	
 	@Override
