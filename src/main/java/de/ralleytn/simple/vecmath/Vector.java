@@ -45,14 +45,6 @@ public abstract class Vector<T extends Vector<T>> {
 	public abstract float lengthSquared();
 	
 	/**
-	 * Negates the vector.
-	 * <p><i>this instance will be manipulated</i></p>
-	 * @return FOREACH element in elements DO element = -element
-	 * @since 1.0.0
-	 */
-	public abstract T negate();
-	
-	/**
 	 * Converts this vector to a {@code float} array.
 	 * @return this vector as a {@code float} array
 	 * @since 1.0.0

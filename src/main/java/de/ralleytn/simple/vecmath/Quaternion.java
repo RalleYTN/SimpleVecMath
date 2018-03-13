@@ -220,15 +220,12 @@ public final class Quaternion extends Vector<Quaternion> {
 	
 	/**
 	 * 
-	 * @param quaternion
+	 * @param quat
 	 * @since 1.0.0
 	 */
-	public final void set(Quaternion quaternion) {
+	public final void set(Quaternion quat) {
 		
-		this.x = quaternion.x;
-		this.y = quaternion.y;
-		this.z = quaternion.z;
-		this.w = quaternion.w;
+		this.set(quat.x, quat.y, quat.z, quat.w);
 	}
 
 	/**
@@ -257,21 +254,18 @@ public final class Quaternion extends Vector<Quaternion> {
 		this.x = data[0];
 		this.y = data[1];
 		
-		if(data.length > 1) this.z = data[2];
-		if(data.length > 2) this.w = data[3];
+		if(data.length > 1) this.z = data[2]; else this.z = 0.0F;
+		if(data.length > 2) this.w = data[3]; else this.w = 0.0F;
 	}
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public final void set(Vector4 vector) {
+	public final void set(Vector4 vec) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
-		this.z = vector.z;
-		this.w = vector.w;
+		this.set(vec.x, vec.y, vec.z, vec.w);
 	}
 	
 	/**
@@ -283,21 +277,17 @@ public final class Quaternion extends Vector<Quaternion> {
 	 */
 	public final void set(float x, float y, float z) {
 		
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.set(x, y, z, 0.0F);
 	}
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public final void set(Vector3 vector) {
+	public final void set(Vector3 vec) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
-		this.z = vector.z;
+		this.set(vec.x, vec.y, vec.z, 0.0F);
 	}
 	
 	/**
@@ -308,59 +298,17 @@ public final class Quaternion extends Vector<Quaternion> {
 	 */
 	public final void set(float x, float y) {
 		
-		this.x = x;
-		this.y = y;
+		this.set(x, y, 0.0F, 0.0F);
 	}
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public final void set(Vector2 vector) {
+	public final void set(Vector2 vec) {
 		
-		this.x = vector.x;
-		this.y = vector.y;
-	}
-	
-	/**
-	 * 
-	 * @param x
-	 * @since 1.0.0
-	 */
-	public final void setX(float x) {
-		
-		this.x = x;
-	}
-	
-	/**
-	 * 
-	 * @param y
-	 * @since 1.0.0
-	 */
-	public final void setY(float y) {
-		
-		this.y = y;
-	}
-	
-	/**
-	 * 
-	 * @param z
-	 * @since 1.0.0
-	 */
-	public final void setZ(float z) {
-		
-		this.z = z;
-	}
-	
-	/**
-	 * 
-	 * @param w
-	 * @since 1.0.0
-	 */
-	public final void setW(float w) {
-		
-		this.w = w;
+		this.set(vec.x, vec.y, 0.0F, 0.0F);
 	}
 	
 	/**
@@ -381,10 +329,7 @@ public final class Quaternion extends Vector<Quaternion> {
 	 */
 	public final Quaternion identity() {
 		
-		this.x = 0.0F;
-		this.y = 0.0F;
-		this.z = 0.0F;
-		this.w = 1.0F;
+		this.set(0.0F, 0.0F, 0.0F, 1.0F);
 		
 		return this;
 	}
@@ -396,16 +341,11 @@ public final class Quaternion extends Vector<Quaternion> {
 	 * @since 1.0.0
 	 */
 	public final Quaternion multiply(Quaternion b) {
-		
-		float x = this.x * b.w + this.w * b.x + this.y * b.z - this.z * b.y;
-		float y = this.y * b.w + this.w * b.y + this.z * b.x - this.x * b.z;
-		float z = this.z * b.w + this.w * b.z + this.x * b.y - this.y * b.x;
-		float w = this.w * b.w - this.x * b.x - this.y * b.y - this.z * b.z;
-		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.w = w;
+
+		this.set(this.x * b.w + this.w * b.x + this.y * b.z - this.z * b.y,
+				 this.y * b.w + this.w * b.y + this.z * b.x - this.x * b.z,
+				 this.z * b.w + this.w * b.z + this.x * b.y - this.y * b.x,
+				 this.w * b.w - this.x * b.x - this.y * b.y - this.z * b.z);
 		
 		return this;
 	}
@@ -424,16 +364,11 @@ public final class Quaternion extends Vector<Quaternion> {
 			
 			n = 1.0F / n;
 		}
-
-		float x = (this.x * b.w - this.w * b.x - this.y * b.z + this.z * b.y) * n;
-		float y = (this.y * b.w - this.w * b.y - this.z * b.x + this.x * b.z) * n;
-		float z = (this.z * b.w - this.w * b.z - this.x * b.y + this.y * b.x) * n;
-		float w = (this.w * b.w + this.x * b.x + this.y * b.y + this.z * b.z) * n;
 		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.w = w;
+		this.set((this.x * b.w - this.w * b.x - this.y * b.z + this.z * b.y) * n,
+				 (this.y * b.w - this.w * b.y - this.z * b.x + this.x * b.z) * n,
+				 (this.z * b.w - this.w * b.z - this.x * b.y + this.y * b.x) * n,
+				 (this.w * b.w + this.x * b.x + this.y * b.y + this.z * b.z) * n);
 		
 		return this;
 	}
@@ -497,6 +432,102 @@ public final class Quaternion extends Vector<Quaternion> {
 		return new Vector4(this);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Vector2 toVector2() {
+		
+		return new Vector2(this.x, this.y);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Vector3 toVector3() {
+		
+		return new Vector3(this.x, this.y, this.z);
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Quaternion conjugate() {
+
+		this.set(-this.x, -this.y, -this.z, this.w);
+		
+		return this;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Quaternion inverse() {
+		
+		float n = this.lengthSquared();
+		
+		this.set(-this.x / n,
+				 -this.y / n,
+				 -this.z / n,
+				  this.w / n);
+		
+		return this;
+	}
+	
+	/**
+	 * 
+	 * @param b
+	 * @param alpha
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Quaternion interpolate(Quaternion b, double alpha) {
+		
+		this.normalize();
+		double n1 = this.length();
+		
+		double x1 = b.x / n1;
+    	double y1 = b.y / n1;
+    	double z1 = b.z / n1;
+    	double w1 = b.w / n1;
+    	
+    	double dot = this.x * x1 + this.y * y1 + this.z * z1 + this.w * w1;
+    	
+    	if(1.0 > Math.abs(dot)) {
+    		
+    		double theta = Math.acos(dot);
+        	double thetaSin = Math.sin(theta);
+        	
+        	if(thetaSin != 0.0) {
+        		
+        		double s = Math.sin((1.0D - alpha) * theta) / thetaSin;
+            	theta = Math.sin(alpha * theta) / thetaSin;
+            	
+            	this.set((float)(s * this.x + theta * x1),
+            			 (float)(s * this.y + theta * y1),
+            			 (float)(s * this.z + theta * z1),
+            			 (float)(s * this.w + theta * w1));
+        		
+        	} else {
+        		
+        		// same quaternion (avoid zero-div)
+        	}
+    		
+    	} else {
+    		
+    		// same quaternion (avoid domain error)
+    	}
+		
+		return this;
+	}
+	
 	@Override
     public final Quaternion clampMin(float min) {
 	
@@ -529,24 +560,6 @@ public final class Quaternion extends Vector<Quaternion> {
 		
 		return this;
 	}
-
-	@Override
-	public final Quaternion negate() {
-		
-		this.x = -this.x;
-		this.y = -this.y;
-		this.z = -this.z;
-		
-		// TODO
-		// ==== 09.03.2018 | Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
-		// For some reason the LWJGL2 legacy code doesn't negate the 4th element of the quaternion.
-		// This doesn't seem correct.
-		// Please someone confirm!
-		// https://github.com/LWJGL/lwjgl/blob/master/src/java/org/lwjgl/util/vector/Quaternion.java
-		// ====
-		
-		return this;
-	}
 	
 	@Override
 	public final Quaternion copy() {
@@ -568,7 +581,13 @@ public final class Quaternion extends Vector<Quaternion> {
 	@Override
 	public final float[] toArray() {
 		
-		return new float[] {this.x, this.y, this.z, this.w};
+		return new float[] {
+				
+			this.x,
+			this.y,
+			this.z,
+			this.w
+		};
 	}
 	
 	@Override

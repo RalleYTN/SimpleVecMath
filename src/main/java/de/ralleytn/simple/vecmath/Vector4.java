@@ -74,24 +74,24 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * Constructs a vector with the values of a two dimensional one.
-	 * @param vector the two dimensional vector
+	 * @param vec the two dimensional vector
 	 * @since 1.0.0
 	 */
-	public Vector4(Vector2 vector) {
+	public Vector4(Vector2 vec) {
 		
-		this.set(vector);
+		this.set(vec);
 	}
 	
 	/**
 	 * Constructs a vector with the values of a two dimensional one and the 3rd and 4th element separately.
-	 * @param vector the two dimensional vector
+	 * @param vec the two dimensional vector
 	 * @param z the 3rd element
 	 * @param w the 4th element
 	 * @since 1.0.0
 	 */
-	public Vector4(Vector2 vector, float z, float w) {
+	public Vector4(Vector2 vec, float z, float w) {
 		
-		this.set(vector);
+		this.set(vec);
 		this.z = z;
 		this.w = w;
 	}
@@ -110,23 +110,23 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public Vector4(Vector3 vector) {
+	public Vector4(Vector3 vec) {
 		
-		this.set(vector);
+		this.set(vec);
 	}
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @param w
 	 * @since 1.0.0
 	 */
-	public Vector4(Vector3 vector, float w) {
+	public Vector4(Vector3 vec, float w) {
 		
-		this.set(vector);
+		this.set(vec);
 		this.w = w;
 	}
 	
@@ -145,12 +145,12 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public Vector4(Vector4 vector) {
+	public Vector4(Vector4 vec) {
 		
-		this.set(vector);
+		this.set(vec);
 	}
 	
 	/**
@@ -165,23 +165,23 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * 
-	 * @param quaternion
+	 * @param quat
 	 * @since 1.0.0
 	 */
-	public Vector4(Quaternion quaternion) {
+	public Vector4(Quaternion quat) {
 		
-		this.set(quaternion);
+		this.set(quat);
 	}
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @param z
 	 * @since 1.0.0
 	 */
-	public Vector4(Vector2 vector, float z) {
+	public Vector4(Vector2 vec, float z) {
 		
-		this.set(vector);
+		this.set(vec);
 		this.z = z;
 	}
 	
@@ -286,38 +286,38 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * 
-	 * @param vector
+	 * @param vec
 	 * @since 1.0.0
 	 */
-	public final void set(Vector2 vector) {
+	public final void set(Vector2 vec) {
 		
-		this.set(vector.x, vector.y, 0.0F, 0.0F);
+		this.set(vec.x, vec.y, 0.0F, 0.0F);
 	}
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix
+	 * @param mat
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 fromMatrix(Matrix3 matrix) {
+	public final Vector4 fromMatrix(Matrix3 mat) {
 		
-		return this.fromMatrix(matrix.m00, matrix.m01, matrix.m02,
-							   matrix.m10, matrix.m11, matrix.m12,
-							   matrix.m20, matrix.m21, matrix.m22);
+		return this.fromMatrix(mat.m00, mat.m01, mat.m02,
+							   mat.m10, mat.m11, mat.m12,
+							   mat.m20, mat.m21, mat.m22);
 	}
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix
+	 * @param mat
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 fromMatrix(Matrix4 matrix) {
+	public final Vector4 fromMatrix(Matrix4 mat) {
 		
-		return this.fromMatrix(matrix.m00, matrix.m01, matrix.m02,
-							   matrix.m10, matrix.m11, matrix.m12,
-							   matrix.m20, matrix.m21, matrix.m22);
+		return this.fromMatrix(mat.m00, mat.m01, mat.m02,
+							   mat.m10, mat.m11, mat.m12,
+							   mat.m20, mat.m21, mat.m22);
 	}
 	
 	/**
@@ -353,48 +353,48 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param vector
+	 * @param b
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 add(Vector4 vector) {
+	public final Vector4 add(Vector4 b) {
 		
-		this.x += vector.x;
-		this.y += vector.y;
-		this.z += vector.z;
-		this.w += vector.w;
+		this.x += b.x;
+		this.y += b.y;
+		this.z += b.z;
+		this.w += b.w;
 		
 		return this;
 	}
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param vector
+	 * @param b
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 subtract(Vector4 vector) {
+	public final Vector4 subtract(Vector4 b) {
 		
-		this.x -= vector.x;
-		this.y -= vector.y;
-		this.z -= vector.z;
-		this.w -= vector.w;
+		this.x -= b.x;
+		this.y -= b.y;
+		this.z -= b.z;
+		this.w -= b.w;
 		
 		return this;
 	}
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param vector
+	 * @param b
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 multiply(Vector4 vector) {
+	public final Vector4 multiply(Vector4 b) {
 		
-		this.x *= vector.x;
-		this.y *= vector.y;
-		this.z *= vector.z;
-		this.w *= vector.w;
+		this.x *= b.x;
+		this.y *= b.y;
+		this.z *= b.z;
+		this.w *= b.w;
 		
 		return this;
 	}
@@ -433,15 +433,15 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix
+	 * @param mat
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 multiply(Matrix3 matrix) {
+	public final Vector4 multiply(Matrix3 mat) {
 		
-		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02,
-				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12,
-				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22,
+		this.set(this.x * mat.m00 + this.y * mat.m01 + this.z * mat.m02,
+				 this.x * mat.m10 + this.y * mat.m11 + this.z * mat.m12,
+				 this.x * mat.m20 + this.y * mat.m21 + this.z * mat.m22,
 				 0.0F);
 		
 		return this;
@@ -449,16 +449,16 @@ public final class Vector4 extends Vector<Vector4> {
 	
 	/**
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix
+	 * @param mat
 	 * @return
 	 * @since 1.0.0
 	 */
-	public final Vector4 multiply(Matrix4 matrix) {
+	public final Vector4 multiply(Matrix4 mat) {
 
-		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02 + this.w * matrix.m03,
-				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12 + this.w * matrix.m13,
-				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22 + this.w * matrix.m23,
-				 this.x * matrix.m30 + this.y * matrix.m31 + this.z * matrix.m32 + this.w * matrix.m33);
+		this.set(this.x * mat.m00 + this.y * mat.m01 + this.z * mat.m02 + this.w * mat.m03,
+				 this.x * mat.m10 + this.y * mat.m11 + this.z * mat.m12 + this.w * mat.m13,
+				 this.x * mat.m20 + this.y * mat.m21 + this.z * mat.m22 + this.w * mat.m23,
+				 this.x * mat.m30 + this.y * mat.m31 + this.z * mat.m32 + this.w * mat.m33);
 		
 		return this;
 	}
@@ -565,6 +565,18 @@ public final class Vector4 extends Vector<Vector4> {
     		   (Math.abs(b.w - this.w) <= epsilon);
     }
     
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Vector4 negate() {
+
+		this.set(-this.x, -this.y, -this.z, -this.w);
+		
+		return this;
+	}
+    
 	@Override
     public final Vector4 clampMin(float min) {
 	
@@ -608,14 +620,6 @@ public final class Vector4 extends Vector<Vector4> {
 	public final float lengthSquared() {
 		
 		return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
-	}
-
-	@Override
-	public final Vector4 negate() {
-
-		this.set(-this.x, -this.y, -this.z, -this.w);
-		
-		return this;
 	}
 
 	@Override

@@ -72,12 +72,12 @@ public final class Vector2 extends Vector<Vector2> {
 	
 	/**
 	 * Constructs a vector with the values of another two dimensional vector.
-	 * @param vector another two dimensional vector
+	 * @param vec another two dimensional vector
 	 * @since 1.0.0
 	 */
-	public Vector2(Vector2 vector) {
+	public Vector2(Vector2 vec) {
 		
-		this.set(vector);
+		this.set(vec);
 	}
 	
 	/**
@@ -94,12 +94,12 @@ public final class Vector2 extends Vector<Vector2> {
 	
 	/**
 	 * Sets the values of this vector.
-	 * @param vector another two dimensional vector
+	 * @param vec another two dimensional vector
 	 * @since 1.0.0
 	 */
-	public final void set(Vector2 vector) {
+	public final void set(Vector2 vec) {
 		
-		this.set(vector.x, vector.y);
+		this.set(vec.x, vec.y);
 	}
 	
 	/**
@@ -245,14 +245,14 @@ public final class Vector2 extends Vector<Vector2> {
 	/**
 	 * Multiplies this vector with a three dimensional matrix.
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix the three dimensional matrix
+	 * @param mat the three dimensional matrix
 	 * @return x = x * m00 + y * m01<br>y = y * m10 + y * m11
 	 * @since 1.0.0
 	 */
-	public final Vector2 multiply(Matrix3 matrix) {
+	public final Vector2 multiply(Matrix3 mat) {
 		
-		this.set(this.x * matrix.m00 + this.y * matrix.m01,
-				 this.x * matrix.m10 + this.y * matrix.m11);
+		this.set(this.x * mat.m00 + this.y * mat.m01,
+				 this.x * mat.m10 + this.y * mat.m11);
 		
 		return this;
 	}
@@ -260,14 +260,14 @@ public final class Vector2 extends Vector<Vector2> {
 	/**
 	 * Multiplies this vector with a four dimensional matrix.
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix matrix the four dimensional matrix
+	 * @param mat matrix the four dimensional matrix
 	 * @return x = x * m00 + y * m01<br>y = y * m10 + y * m11
 	 * @since 1.0.0
 	 */
-	public final Vector2 multiply(Matrix4 matrix) {
+	public final Vector2 multiply(Matrix4 mat) {
 
-		this.set(this.x * matrix.m00 + this.y * matrix.m01,
-				 this.x * matrix.m10 + this.y * matrix.m11);
+		this.set(this.x * mat.m00 + this.y * mat.m01,
+				 this.x * mat.m10 + this.y * mat.m11);
 		
 		return this;
 	}
@@ -383,6 +383,18 @@ public final class Vector2 extends Vector<Vector2> {
     	
     	return this;
     }
+    
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Vector2 negate() {
+		
+		this.set(-this.x, -this.y);
+
+		return this;
+	}
 	
 	@Override
     public final Vector2 clampMin(float min) {
@@ -421,14 +433,6 @@ public final class Vector2 extends Vector<Vector2> {
 	public final float lengthSquared() {
 		
 		return this.x * this.x + this.y * this.y;
-	}
-
-	@Override
-	public final Vector2 negate() {
-		
-		this.set(-this.x, -this.y);
-
-		return this;
 	}
 
 	@Override

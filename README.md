@@ -1,3 +1,5 @@
+![Build Result](https://api.travis-ci.org/RalleYTN/SimpleVecMath.svg?branch=master)
+
 # Description
 
 This is a simple to use vector math library written in pure Java.

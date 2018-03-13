@@ -68,23 +68,23 @@ public final class Vector3 extends Vector<Vector3> {
 	
 	/**
 	 * Constructs a vector with the values of a two dimensional one.
-	 * @param vector a two dimensional vector
+	 * @param vec a two dimensional vector
 	 * @since 1.0.0
 	 */
-	public Vector3(Vector2 vector) {
+	public Vector3(Vector2 vec) {
 		
-		this.set(vector);
+		this.set(vec);
 	}
 	
 	/**
 	 * Constructs a vector with the 1st and 2nd element from a two dimensional vector and a separate 3rd element.
-	 * @param vector a two dimensional vector
+	 * @param vec a two dimensional vector
 	 * @param z the 3rd element
 	 * @since 1.0.0
 	 */
-	public Vector3(Vector2 vector, float z) {
+	public Vector3(Vector2 vec, float z) {
 		
-		this.set(vector);
+		this.set(vec);
 		this.z = z;
 	}
 	
@@ -102,12 +102,12 @@ public final class Vector3 extends Vector<Vector3> {
 	
 	/**
 	 * Constructs a vector from another three dimensional vector.
-	 * @param vector another three dimensional vector
+	 * @param vec another three dimensional vector
 	 * @since 1.0.0
 	 */
-	public Vector3(Vector3 vector) {
+	public Vector3(Vector3 vec) {
 		
-		this.set(vector);
+		this.set(vec);
 	}
 	
 	/**
@@ -146,12 +146,12 @@ public final class Vector3 extends Vector<Vector3> {
 	
 	/**
 	 * Sets the values of this vector.
-	 * @param vector another three dimensional vector
+	 * @param vec another three dimensional vector
 	 * @since 1.0.0
 	 */
-	public final void set(Vector3 vector) {
+	public final void set(Vector3 vec) {
 		
-		this.set(vector.x, vector.y, vector.z);
+		this.set(vec.x, vec.y, vec.z);
 	}
 	
 	/**
@@ -167,12 +167,12 @@ public final class Vector3 extends Vector<Vector3> {
 	
 	/**
 	 * Sets the values of this vector.
-	 * @param vector a two dimensional vector
+	 * @param vec a two dimensional vector
 	 * @since 1.0.0
 	 */
-	public final void set(Vector2 vector) {
+	public final void set(Vector2 vec) {
 		
-		this.set(vector.x, vector.y, 0.0F);
+		this.set(vec.x, vec.y, 0.0F);
 	}
 	
 	/**
@@ -358,15 +358,15 @@ public final class Vector3 extends Vector<Vector3> {
 	/**
 	 * Multiplies this vector with a three dimensional matrix.
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix the three dimensional matrix
+	 * @param mat the three dimensional matrix
 	 * @return x = x * m00 + y * m01 + z * m02<br>y = x * m10 + y * m11 + z * m12<br>z = x * m20 + y * m21 + z * m22
 	 * @since 1.0.0
 	 */
-	public final Vector3 multiply(Matrix3 matrix) {
+	public final Vector3 multiply(Matrix3 mat) {
 		
-		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02,
-				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12,
-				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22);
+		this.set(this.x * mat.m00 + this.y * mat.m01 + this.z * mat.m02,
+				 this.x * mat.m10 + this.y * mat.m11 + this.z * mat.m12,
+				 this.x * mat.m20 + this.y * mat.m21 + this.z * mat.m22);
 		
 		return this;
 	}
@@ -374,15 +374,15 @@ public final class Vector3 extends Vector<Vector3> {
 	/**
 	 * Multiplies this vector with a four dimensional matrix.
 	 * <p><i>this instance will be manipulated</i></p>
-	 * @param matrix the four dimensional matrix
+	 * @param mat the four dimensional matrix
 	 * @return x = x * m00 + y * m01 + z * m02<br>y = x * m10 + y * m11 + z * m12<br>z = x * m20 + y * m21 + z * m22
 	 * @since 1.0.0
 	 */
-	public final Vector3 multiply(Matrix4 matrix) {
+	public final Vector3 multiply(Matrix4 mat) {
 		
-		this.set(this.x * matrix.m00 + this.y * matrix.m01 + this.z * matrix.m02,
-				 this.x * matrix.m10 + this.y * matrix.m11 + this.z * matrix.m12,
-				 this.x * matrix.m20 + this.y * matrix.m21 + this.z * matrix.m22);
+		this.set(this.x * mat.m00 + this.y * mat.m01 + this.z * mat.m02,
+				 this.x * mat.m10 + this.y * mat.m11 + this.z * mat.m12,
+				 this.x * mat.m20 + this.y * mat.m21 + this.z * mat.m22);
 		
 		return this;
 	}
@@ -441,6 +441,18 @@ public final class Vector3 extends Vector<Vector3> {
 		return new Quaternion(this);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final Vector3 negate() {
+		
+		this.set(-this.x, -this.y, -this.z);
+
+		return this;
+	}
+	
 	@Override
     public final Vector3 clampMin(float min) {
 	
@@ -481,14 +493,6 @@ public final class Vector3 extends Vector<Vector3> {
 	public final float lengthSquared() {
 		
 		return this.x * this.x + this.y * this.y + this.z * this.z;
-	}
-
-	@Override
-	public final Vector3 negate() {
-		
-		this.set(-this.x, -this.y, -this.z);
-
-		return this;
 	}
 
 	@Override

@@ -13,7 +13,7 @@
 	<description>This is a simple to use vector math library written in pure Java.</description>
 	<licenses>
         <license>
-            <name>MIT LICENSE</name>
+            <name>MIT License</name>
             <url>https://github.com/RalleYTN/SimpleVecMath/blob/master/LICENSE</url>
         </license>
 	</licenses>
@@ -43,13 +43,49 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-surefire-plugin</artifactId>
+        		<version>2.19.1</version>
+        		<dependencies>
+            		<dependency>
+                		<groupId>org.junit.platform</groupId>
+                		<artifactId>junit-platform-surefire-provider</artifactId>
+                		<version>1.1.0</version>
+            		</dependency>
+        		</dependencies>
+    		</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
+    		<groupId>org.junit.jupiter</groupId>
+    		<artifactId>junit-jupiter-api</artifactId>
+    		<version>5.0.3</version>
+    		<scope>test</scope>
+    	</dependency>
+		<dependency>
 			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.0.3</version>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.0.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>4.12.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>1.0.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-runner</artifactId>
+			<version>1.0.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -182,6 +182,21 @@ public final class VectorN extends Vector<VectorN> {
 		return this.data[index];
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @since 1.0.0
+	 */
+	public final VectorN negate() {
+		
+		for(int index = 0; index < this.size; index++) {
+			
+			this.data[index] = -this.data[index];
+		}
+		
+		return this;
+	}
+	
 	@Override
     public final VectorN clampMin(float min) {
 	
@@ -242,17 +257,6 @@ public final class VectorN extends Vector<VectorN> {
 		}
 		
 		return current;
-	}
-
-	@Override
-	public final VectorN negate() {
-		
-		for(int index = 0; index < this.size; index++) {
-			
-			this.data[index] = -this.data[index];
-		}
-		
-		return this;
 	}
 
 	@Override
