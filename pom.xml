@@ -35,8 +35,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
-					<fork>true</fork>
-					<executable>javac9</executable>
 					<source>9</source>
                     <target>9</target>
                     <showWarnings>true</showWarnings>
