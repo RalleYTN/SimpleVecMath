@@ -1,4 +1,5 @@
-![Build Result](https://api.travis-ci.org/RalleYTN/SimpleVecMath.svg?branch=master)
+[![Build Result](https://api.travis-ci.org/RalleYTN/SimpleVecMath.svg?branch=master)](https://travis-ci.org/RalleYTN/SimpleVecMath)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/66eea9146c6e4b319c7113f49fc2cc05)](https://www.codacy.com/app/ralph.niemitz/SimpleVecMath?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RalleYTN/SimpleVecMath&amp;utm_campaign=Badge_Grade)
 
 # Description
 
